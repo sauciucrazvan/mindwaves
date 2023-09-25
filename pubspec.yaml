@@ -1,0 +1,48 @@
+name: mindwaves
+description: Fully open-source mood tracker with AI integration and real-time notifications to keep track of your life.
+version: 1.0.0
+
+publish_to: 'none'
+
+
+environment:
+  sdk: '>=3.1.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  intl: ^0.18.1
+  
+  flutter_native_splash: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/images/MindwaveAppIcon-min.png"
+
+flutter_native_splash:
+  color: "#E4E5F1"
+  color_dark: "#121212"
+  image: assets/images/MindwaveSplashLogo.png
+  image_dark: assets/images/MindwaveSplashLogo.png
+
+  android_12:
+    color: "#E4E5F1"
+    color_dark: "#121212"
+    image: assets/images/MindwaveSplashLogo.png
+    image_dark: assets/images/MindwaveSplashLogo.png
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
