@@ -1,9 +1,10 @@
 // Generic imports
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-
-// Front-end imports
 import 'package:mindwaves/frontend/config/palette.dart';
+import 'package:mindwaves/frontend/routes/dashboard/components/mood_selector.dart';
+import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
+import 'package:mindwaves/frontend/widgets/fields/field.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -13,18 +14,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final PageController _pageController =
-      PageController(viewportFraction: 0.35, initialPage: 2);
-
-  int selectedIndex = moodColors.length ~/ 2;
-
-  Map<String, IconData> moodsInfo = {
-    "Very Sad": Icons.sentiment_very_dissatisfied,
-    "Sad": Icons.sentiment_dissatisfied,
-    "Meh..": Icons.sentiment_neutral,
-    "Okay": Icons.sentiment_satisfied,
-    "Good!": Icons.sentiment_very_satisfied,
-  };
+  final PageController _pageController = PageController(
+      viewportFraction: 0.35, initialPage: moodColors.length ~/ 2);
+  final TextEditingController _detailsController = TextEditingController();
 
   @override
   void dispose() {
@@ -39,82 +31,85 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Image.asset(
-          "assets/images/MindwaveAppIcon.png",
-          width: 32,
-          height: 32,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/MindwaveAppIcon.png",
+              width: 32,
+              height: 32,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              "Mindwaves",
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ],
         ),
         centerTitle: true,
         backgroundColor: backgroundColor,
         shadowColor: Colors.transparent,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Today",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                DateFormat("MMM dd, yyyy").format(DateTime.now()),
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 24),
-              SizedBox(
-                height: 100,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: moodColors.length,
-                  onPageChanged: (int index) {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    final color = moodColors[index];
-                    final scaleFactor = (index == selectedIndex) ? 0.9 : 0.75;
-
-                    return Transform.scale(
-                      scale: scaleFactor,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedIndex = index;
-                            _pageController.animateToPage(
-                              index,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeOut,
-                            );
-                          });
-                        },
-                        child: CircleAvatar(
-                          backgroundColor: color,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                moodsInfo.values.elementAt(index),
-                                color: Colors.white,
-                                size: 32,
-                              ),
-                              Text(
-                                moodsInfo.keys.elementAt(index),
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Today",
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
-              ),
-            ],
+                Text(
+                  DateFormat("MMM dd, yyyy").format(DateTime.now()),
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 16),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    "How was your day?",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                MoodSelector(pageController: _pageController),
+                const Divider(),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Text(
+                      "What have you done today?",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(width: 2),
+                    Text(
+                      "(optional)",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Field(
+                  textEditingController: _detailsController,
+                  description: "Provide more details...",
+                  maxLines: 4,
+                  maxLength: 4096,
+                  padding: 0,
+                ),
+                const SizedBox(height: 12),
+                Center(
+                  child: LongButton(
+                    title: "Track the day",
+                    icon: Icons.equalizer,
+                    onTap: () {},
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
