@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 // Frontend imports
 import 'package:mindwaves/frontend/config/palette.dart';
 import 'package:mindwaves/frontend/routes/dashboard/components/mood_selector.dart';
+import 'package:mindwaves/frontend/routes/history/history.dart';
+import 'package:mindwaves/frontend/routes/reports/report.dart';
 import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
 import 'package:mindwaves/frontend/widgets/fields/field.dart';
@@ -150,14 +152,24 @@ class _DashboardState extends State<Dashboard> {
                         title: "Weekly report",
                         icon: Icons.calendar_month,
                         color: Theme.of(context).colorScheme.secondary,
-                        onTap: () {},
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const WeeklyReport(),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 4),
                       LongButton(
                         title: "View history",
                         icon: Icons.history,
                         color: Theme.of(context).colorScheme.secondary,
-                        onTap: () {},
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const History(),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 4),
                       LongButton(
