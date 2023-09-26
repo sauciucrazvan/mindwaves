@@ -1,8 +1,8 @@
 // Imported from Tracely (https://github.com/sauciucrazvan/tracely)
 import 'package:flutter/material.dart';
 
-class BackButton extends StatelessWidget {
-  const BackButton({super.key});
+class LeadingButton extends StatelessWidget {
+  const LeadingButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class BackButton extends StatelessWidget {
         onPressed: () => Navigator.pop(context),
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.zero,
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
         child: Center(
           child: Icon(

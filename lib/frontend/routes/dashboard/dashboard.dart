@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 // Frontend imports
 import 'package:mindwaves/frontend/config/palette.dart';
 import 'package:mindwaves/frontend/routes/dashboard/components/mood_selector.dart';
+import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
 import 'package:mindwaves/frontend/widgets/fields/field.dart';
 
@@ -163,7 +164,12 @@ class _DashboardState extends State<Dashboard> {
                         title: "Settings",
                         icon: Icons.settings,
                         color: Theme.of(context).colorScheme.secondary,
-                        onTap: () {},
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsPanel(),
+                          ),
+                        ),
                       ),
                     ],
                   ),
