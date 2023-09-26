@@ -1,5 +1,7 @@
+// Generic imports
 import 'package:flutter/material.dart';
 
+// Frontend imports
 import 'package:mindwaves/frontend/config/palette.dart';
 
 class MoodSelector extends StatefulWidget {
@@ -14,7 +16,7 @@ class MoodSelector extends StatefulWidget {
 class _MoodSelectorState extends State<MoodSelector> {
   Map<String, IconData> moodsInfo = {
     "Very Sad": Icons.sentiment_very_dissatisfied,
-    "Sad": Icons.sentiment_dissatisfied,
+    "Sad :(": Icons.sentiment_dissatisfied,
     "Meh..": Icons.sentiment_neutral,
     "Okay": Icons.sentiment_satisfied,
     "Good!": Icons.sentiment_very_satisfied,
@@ -71,7 +73,7 @@ class _MoodSelectorState extends State<MoodSelector> {
                     ),
                     Text(
                       moodsInfo.keys.elementAt(index),
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: const TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ],
                 ),

@@ -1,6 +1,8 @@
 // Generic imports
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+
+// Frontend imports
 import 'package:mindwaves/frontend/config/palette.dart';
 import 'package:mindwaves/frontend/routes/dashboard/components/mood_selector.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
@@ -59,6 +61,7 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Dashboard title
                 Text(
                   "Today",
                   style: Theme.of(context).textTheme.bodyLarge,
@@ -67,8 +70,11 @@ class _DashboardState extends State<Dashboard> {
                   DateFormat("MMM dd, yyyy").format(DateTime.now()),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
+
                 const SizedBox(height: 16),
                 const Divider(),
+
+                // Mood selector title
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
@@ -76,9 +82,14 @@ class _DashboardState extends State<Dashboard> {
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
+
+                // Mood selector
                 MoodSelector(pageController: _pageController),
+
                 const Divider(),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
+
+                // Details field title
                 Row(
                   children: [
                     Text(
@@ -92,22 +103,71 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 8),
+
+                // Details field
                 Field(
                   textEditingController: _detailsController,
                   description: "Provide more details...",
                   maxLines: 4,
                   maxLength: 4096,
-                  padding: 0,
                 ),
+
                 const SizedBox(height: 12),
+
+                // Track button
                 Center(
-                  child: LongButton(
-                    title: "Track the day",
-                    icon: Icons.equalizer,
-                    onTap: () {},
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width - 100,
+                    child: LongButton(
+                      title: "Track the day",
+                      icon: Icons.equalizer,
+                      color: Theme.of(context).colorScheme.primary,
+                      onTap: () {},
+                    ),
                   ),
                 ),
+
+                const Divider(),
+                const SizedBox(height: 16),
+
+                // Quick access title
+                Text(
+                  "Quick access",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+
+                const SizedBox(height: 12),
+
+                // Quick access panel
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    children: [
+                      LongButton(
+                        title: "Weekly report",
+                        icon: Icons.calendar_month,
+                        color: Theme.of(context).colorScheme.secondary,
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 4),
+                      LongButton(
+                        title: "View history",
+                        icon: Icons.history,
+                        color: Theme.of(context).colorScheme.secondary,
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 4),
+                      LongButton(
+                        title: "Settings",
+                        icon: Icons.settings,
+                        color: Theme.of(context).colorScheme.secondary,
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),

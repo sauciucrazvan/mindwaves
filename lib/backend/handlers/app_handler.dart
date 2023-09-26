@@ -1,5 +1,7 @@
+// Generic imports
 import 'package:flutter/material.dart';
 
+// Frontend imports
 import 'package:mindwaves/frontend/config/palette.dart';
 import 'package:mindwaves/frontend/routes/dashboard/dashboard.dart';
 
