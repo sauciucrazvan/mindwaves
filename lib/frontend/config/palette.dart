@@ -10,7 +10,8 @@ ThemeData lightTheme = ThemeData(
   textTheme: const TextTheme(
     bodySmall: TextStyle(color: Color(0xFF333333), fontSize: 12),
     bodyMedium: TextStyle(color: Color(0xFF333333), fontSize: 16),
-    bodyLarge: TextStyle(color: Color(0xFF333333), fontSize: 20),
+    bodyLarge: TextStyle(
+        color: Color(0xFF333333), fontSize: 20, fontWeight: FontWeight.bold),
   ),
 );
 
@@ -24,7 +25,8 @@ ThemeData darkTheme = ThemeData(
   textTheme: const TextTheme(
     bodySmall: TextStyle(color: Color(0xFFFFFFFF), fontSize: 12),
     bodyMedium: TextStyle(color: Color(0xFFFFFFFF), fontSize: 16),
-    bodyLarge: TextStyle(color: Color(0xFFFFFFFF), fontSize: 20),
+    bodyLarge: TextStyle(
+        color: Color(0xFFFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
   ),
 );
 

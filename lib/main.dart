@@ -7,8 +7,12 @@
 -----
 */
 
+// Generic imports
 import 'package:flutter/material.dart';
 
+// Application handler
+import 'package:mindwaves/backend/handlers/app_handler.dart';
+
 void main() {
-  runApp(const Placeholder());
+  runApp(const Mindwaves());
 }
