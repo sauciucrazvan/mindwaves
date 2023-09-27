@@ -1,10 +1,11 @@
 // Generic imports
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:graphic/graphic.dart';
-import 'package:mindwaves/frontend/config/palette.dart';
-import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
+import 'package:flutter/material.dart';
 
 // Frontend imports
+import 'package:mindwaves/frontend/config/palette.dart';
+import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 
 class WeeklyReport extends StatelessWidget {
@@ -13,6 +14,21 @@ class WeeklyReport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
+
+    const List<Map<String, dynamic>> dataMap = [
+      {'day': 'Mon', 'score': 4},
+      {'day': 'Tue', 'score': 1},
+      {'day': 'Wed', 'score': 3},
+      {'day': 'Thu', 'score': 4},
+      {'day': 'Fri', 'score': 1},
+      {'day': 'Sat', 'score': 2},
+      {'day': 'Sun', 'score': 5},
+    ];
+
+    num totalScore =
+        dataMap.fold(0, (num previousValue, Map<String, dynamic> element) {
+      return previousValue + element['score'];
+    });
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -47,15 +63,7 @@ class WeeklyReport extends StatelessWidget {
                 height: 150,
                 width: MediaQuery.of(context).size.width - 50,
                 child: Chart(
-                  data: const [
-                    {'day': 'Mon', 'score': 4},
-                    {'day': 'Tue', 'score': 1},
-                    {'day': 'Wed', 'score': 3},
-                    {'day': 'Thu', 'score': 4},
-                    {'day': 'Fri', 'score': 1},
-                    {'day': 'Sat', 'score': 2},
-                    {'day': 'Sun', 'score': 5},
-                  ],
+                  data: dataMap,
                   variables: {
                     'day': Variable(
                       accessor: (Map map) => map['day'] as String,
@@ -80,12 +88,12 @@ class WeeklyReport extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Your weekly score is 20/35.",
+                      "Your weekly score is $totalScore/35.",
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "Report generated on Sep 27, 2023.",
+                      "Report generated on ${DateFormat('MMM dd, yyyy').format(DateTime.now())}.",
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
@@ -96,7 +104,7 @@ class WeeklyReport extends StatelessWidget {
               const Divider(),
               const SizedBox(height: 16),
 
-              // Improvements category
+              // Improvements category ~ should be refactored in the future
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Text(
