@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphic/graphic.dart';
 import 'package:mindwaves/frontend/config/palette.dart';
+import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
@@ -69,6 +70,65 @@ class WeeklyReport extends StatelessWidget {
                     )
                   ],
                   axes: [Defaults.horizontalAxis],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // Score report
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      "Your weekly score is 20/35.",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "Report generated on Sep 27, 2023.",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+              const Divider(),
+              const SizedBox(height: 16),
+
+              // Improvements category
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Text(
+                  "How can you improve your mood level?",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              Text(
+                "AI Improvements is turned off in the settings.",
+                style: TextStyle(
+                  color: Colors.red[400],
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPanel(),
+                  ),
+                ),
+                child: const Text(
+                  "Turn it on on the settings page.",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
