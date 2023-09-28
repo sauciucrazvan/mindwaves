@@ -4,6 +4,8 @@
   Mindwaves
   Fully open-source mood tracker with AI integration and real-time notifications to keep track of your life.
 
+  TODO: Create a moods model that stores it's title, color and score
+
 -----
 */
 
