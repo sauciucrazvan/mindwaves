@@ -12,9 +12,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Time formatting
   intl: ^0.18.1
 
+  # Graphs
   graphic: ^2.2.0
+
+  # Animations
+  lottie: ^2.6.0
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +33,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/animations/
