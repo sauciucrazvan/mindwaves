@@ -13,7 +13,7 @@ final Map<String, Map<String, dynamic>> moods = {
   },
   "Meh..": {
     "icon": Icons.sentiment_neutral,
-    "color": const Color(0xFFDD6E42),
+    "color": const Color(0xFFCA5310),
     "score": 6,
   },
   "Okay": {
