@@ -4,7 +4,7 @@ import 'package:graphic/graphic.dart';
 import 'package:flutter/material.dart';
 
 // Frontend imports
-import 'package:mindwaves/frontend/config/palette.dart';
+import 'package:mindwaves/frontend/config/moods.dart';
 import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 
@@ -15,6 +15,7 @@ class WeeklyReport extends StatelessWidget {
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
 
+    // Temporary data, only for debug
     const List<Map<String, dynamic>> dataMap = [
       {'day': 'Mon', 'score': 4},
       {'day': 'Tue', 'score': 1},
@@ -29,6 +30,10 @@ class WeeklyReport extends StatelessWidget {
         dataMap.fold(0, (num previousValue, Map<String, dynamic> element) {
       return previousValue + element['score'];
     });
+
+    // Generate a map of colors for the graph
+    List<Color> moodColors = [];
+    moods.forEach((mood, details) => moodColors.add(details["color"]));
 
     return Scaffold(
       backgroundColor: backgroundColor,

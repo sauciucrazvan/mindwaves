@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Frontend imports
-import 'package:mindwaves/frontend/config/palette.dart';
+import 'package:mindwaves/frontend/config/moods.dart';
 
 class MoodSelector extends StatefulWidget {
   final PageController pageController;
@@ -14,14 +14,6 @@ class MoodSelector extends StatefulWidget {
 }
 
 class _MoodSelectorState extends State<MoodSelector> {
-  Map<String, IconData> moodsInfo = {
-    "Very Sad": Icons.sentiment_very_dissatisfied,
-    "Sad :(": Icons.sentiment_dissatisfied,
-    "Meh..": Icons.sentiment_neutral,
-    "Okay": Icons.sentiment_satisfied,
-    "Good!": Icons.sentiment_very_satisfied,
-  };
-
   int selectedIndex = 0;
 
   @override
@@ -37,14 +29,14 @@ class _MoodSelectorState extends State<MoodSelector> {
       height: 100,
       child: PageView.builder(
         controller: widget.pageController,
-        itemCount: moodColors.length,
+        itemCount: moods.length,
         onPageChanged: (int index) {
           setState(() {
             selectedIndex = index;
           });
         },
         itemBuilder: (BuildContext context, int index) {
-          final color = moodColors[index];
+          final color = moods.entries.elementAt(index).value["color"];
           final scaleFactor = (index == selectedIndex) ? 0.9 : 0.75;
 
           return Transform.scale(
@@ -67,12 +59,12 @@ class _MoodSelectorState extends State<MoodSelector> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
-                      moodsInfo.values.elementAt(index),
+                      moods.entries.elementAt(index).value["icon"],
                       color: Colors.white,
                       size: 32,
                     ),
                     Text(
-                      moodsInfo.keys.elementAt(index),
+                      moods.entries.elementAt(index).key,
                       style: const TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ],
