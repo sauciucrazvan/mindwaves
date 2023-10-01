@@ -1,6 +1,9 @@
 // Generic imports
 import 'package:flutter/material.dart';
 
+// Backend imports
+import 'package:mindwaves/backend/services/tracker_service.dart';
+
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
@@ -54,7 +57,8 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   color: Colors.white,
                 ),
                 color: Theme.of(context).colorScheme.secondary,
-                onTap: () {},
+                onTap: () => TrackerService()
+                    .clearData(), // TODO: Add confirmation dialog
               )
             ],
           ),

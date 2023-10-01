@@ -27,4 +27,6 @@ class TrackerService {
   Map<dynamic, dynamic> getData() {
     return _masterBox.toMap();
   }
+
+  void clearData() => _masterBox.clear();
 }

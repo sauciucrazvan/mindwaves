@@ -1,10 +1,12 @@
 // Generic imports
 import 'package:flutter/material.dart';
+
+// Backend imports
 import 'package:mindwaves/backend/services/tracker_service.dart';
-import 'package:mindwaves/frontend/routes/history/components/day_container.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
+import 'package:mindwaves/frontend/routes/history/components/day_container.dart';
 
 class History extends StatelessWidget {
   const History({super.key});
