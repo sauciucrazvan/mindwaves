@@ -121,7 +121,7 @@ class _DashboardState extends State<Dashboard> {
                   textEditingController: _detailsController,
                   description: "Provide more details...",
                   maxLines: 4,
-                  maxLength: 4096,
+                  maxLength: 2048,
                 ),
 
                 const SizedBox(height: 12),
@@ -145,6 +145,12 @@ class _DashboardState extends State<Dashboard> {
                         if (!succedeed) {
                           showElevatedNotification(context,
                               "You've already tracked your day!", Colors.red);
+                        } else {
+                          _detailsController.clear();
+                          showElevatedNotification(
+                              context,
+                              "Successfully tracked the day.",
+                              Colors.lightGreen.shade700);
                         }
                       },
                     ),
