@@ -40,7 +40,7 @@ class _DashboardState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "assets/images/MindwaveAppIcon.png",
+              "assets/images/Mindwaves.png",
               width: 32,
               height: 32,
             ),

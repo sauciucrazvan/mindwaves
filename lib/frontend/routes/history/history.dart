@@ -15,7 +15,7 @@ class History extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: Image.asset(
-          "assets/images/MindwaveAppIcon.png",
+          "assets/images/Mindwaves.png",
           width: 32,
           height: 32,
         ),
