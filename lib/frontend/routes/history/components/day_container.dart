@@ -71,6 +71,14 @@ class DayContainer extends StatelessWidget {
                           ),
                         ],
                       ),
+                      if (details.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            details,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ),
                     ],
                   ),
                 ),
