@@ -141,13 +141,8 @@ class _DashboardState extends State<Dashboard> {
                             _detailsController.text);
 
                         if (!succedeed) {
-                          String? data = TrackerService().getDay();
-                          showElevatedNotification(
-                              context,
-                              (data != null)
-                                  ? data
-                                  : "You've already tracked your day!",
-                              Colors.red);
+                          showElevatedNotification(context,
+                              "You've already tracked your day!", Colors.red);
                         }
                       },
                     ),
@@ -162,7 +157,7 @@ class _DashboardState extends State<Dashboard> {
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width - 100,
                     child: LongButton(
-                      title: "Delete today data",
+                      title: "Delete today's data",
                       trailing: const Icon(Icons.delete, color: Colors.red),
                       color: Theme.of(context).colorScheme.secondary,
                       onTap: () => TrackerService().deleteDay(),

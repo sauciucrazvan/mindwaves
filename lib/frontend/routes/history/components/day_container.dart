@@ -31,15 +31,28 @@ class DayContainer extends StatelessWidget {
                   width: 2,
                   height: 25,
                   color: Theme.of(context).colorScheme.primary,
-                ), // color based on mood
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        DateFormat("EEEE").format(DateTime.parse(id)),
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      Row(
+                        children: [
+                          Text(
+                            DateFormat("EEEE").format(DateTime.parse(id)),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            "+$score",
+                            style: const TextStyle(
+                              color: Colors.amber,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,

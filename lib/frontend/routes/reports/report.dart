@@ -29,13 +29,13 @@ class WeeklyReport extends StatelessWidget {
 
     // Temporary random data, only for debug
     List<Map<String, dynamic>> dataMap = [
-      {'day': 'Mon', 'score': 2 + Random().nextInt(maxScore - 2)},
-      {'day': 'Tue', 'score': 2 + Random().nextInt(maxScore - 2)},
-      {'day': 'Wed', 'score': 2 + Random().nextInt(maxScore - 2)},
-      {'day': 'Thu', 'score': 2 + Random().nextInt(maxScore - 2)},
-      {'day': 'Fri', 'score': 2 + Random().nextInt(maxScore - 2)},
-      {'day': 'Sat', 'score': 2 + Random().nextInt(maxScore - 2)},
-      {'day': 'Sun', 'score': 2 + Random().nextInt(maxScore - 2)},
+      {'day': 'Mon', 'score': Random().nextInt(maxScore) + 1},
+      {'day': 'Tue', 'score': Random().nextInt(maxScore) + 1},
+      {'day': 'Wed', 'score': Random().nextInt(maxScore) + 1},
+      {'day': 'Thu', 'score': Random().nextInt(maxScore) + 1},
+      {'day': 'Fri', 'score': Random().nextInt(maxScore) + 1},
+      {'day': 'Sat', 'score': Random().nextInt(maxScore) + 1},
+      {'day': 'Sun', 'score': Random().nextInt(maxScore) + 1},
     ];
 
     num totalScore =

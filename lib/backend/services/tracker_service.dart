@@ -15,19 +15,6 @@ class TrackerService {
     return true;
   }
 
-  String? getDay() {
-    String id = DateFormat("yyyy-MM-dd").format(DateTime.now());
-
-    if (_masterBox.containsKey(id)) {
-      Map dayInfo = _masterBox.get(id) as Map;
-      int score = dayInfo['score'];
-      String details = dayInfo['details'];
-      return 'Score: $score, Details: $details';
-    } else {
-      return null;
-    }
-  }
-
   bool deleteDay() {
     String id = DateFormat("yyyy-MM-dd").format(DateTime.now());
     if (_masterBox.containsKey(id)) {
