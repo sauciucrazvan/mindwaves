@@ -38,6 +38,8 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
 
+    DateTime today = DateTime.now();
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -71,11 +73,11 @@ class _DashboardState extends State<Dashboard> {
               children: [
                 // Dashboard title
                 Text(
-                  "Today",
+                  DateFormat("EEEE").format(today),
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Text(
-                  DateFormat("MMM dd, yyyy").format(DateTime.now()),
+                  DateFormat("MMM dd, yyyy").format(today),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
 

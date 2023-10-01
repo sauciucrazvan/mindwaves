@@ -26,9 +26,4 @@ final Map<String, Map<String, dynamic>> moods = {
     "color": const Color(0xFF0C8346),
     "score": 5,
   },
-  // "Excellent :D": { //testing purposes
-  //   "icon": Icons.celebration,
-  //   "color": Colors.amber,
-  //   "score": 0,
-  // }
 };
