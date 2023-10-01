@@ -12,6 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
   # Time formatting
   intl: ^0.18.1
 
@@ -24,6 +28,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.6
 
   flutter_lints: ^2.0.0
 
