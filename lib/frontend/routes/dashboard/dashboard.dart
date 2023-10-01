@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+// Backend imports
+import 'package:mindwaves/backend/services/tracker_service.dart';
+
 // Frontend imports
 import 'package:mindwaves/frontend/config/moods.dart';
 import 'package:mindwaves/frontend/widgets/fields/field.dart';
@@ -11,6 +14,7 @@ import 'package:mindwaves/frontend/routes/history/history.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
 import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 import 'package:mindwaves/frontend/routes/dashboard/components/mood_selector.dart';
+import 'package:mindwaves/frontend/widgets/notifications/elevated_notification.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -129,7 +133,39 @@ class _DashboardState extends State<Dashboard> {
                       trailing: Lottie.asset("assets/animations/chart.json",
                           width: 32, height: 32),
                       color: Theme.of(context).colorScheme.secondary,
-                      onTap: () {},
+                      onTap: () {
+                        bool succedeed = TrackerService().trackDay(
+                            moods.values.elementAt(
+                                _pageController.page?.round() ??
+                                    _pageController.initialPage)['score'],
+                            _detailsController.text);
+
+                        if (!succedeed) {
+                          String? data = TrackerService().getDay();
+                          showElevatedNotification(
+                              context,
+                              (data != null)
+                                  ? data
+                                  : "You've already tracked your day!",
+                              Colors.red);
+                        }
+                      },
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 4),
+
+                // Debug delete button
+
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width - 100,
+                    child: LongButton(
+                      title: "Delete today data",
+                      trailing: const Icon(Icons.delete, color: Colors.red),
+                      color: Theme.of(context).colorScheme.secondary,
+                      onTap: () => TrackerService().deleteDay(),
                     ),
                   ),
                 ),

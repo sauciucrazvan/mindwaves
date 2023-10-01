@@ -12,10 +12,14 @@
 
 // Generic imports
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 // Application handler
 import 'package:mindwaves/backend/handlers/app_handler.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter(); // Initialize Hive for Flutter
+  Hive.openBox("mindwaves"); // Open the Hive box that represents the app
+
   runApp(const Mindwaves());
 }

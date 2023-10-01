@@ -1,5 +1,7 @@
 // Generic imports
 import 'package:flutter/material.dart';
+import 'package:mindwaves/backend/services/tracker_service.dart';
+import 'package:mindwaves/frontend/routes/history/components/day_container.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
@@ -39,58 +41,28 @@ class History extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                              width: 2,
-                              height: 25,
-                              color: Colors.pink), // color based on mood
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Monday",
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.calendar_month,
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .color,
-                                      size: 12,
-                                    ),
-                                    const SizedBox(width: 2),
-                                    Text(
-                                      "Sep 25, 2023",
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: TrackerService().getData().length,
+                  itemBuilder: (context, index) {
+                    return DayContainer(
+                      id: TrackerService()
+                          .getData()
+                          .entries
+                          .elementAt(index)
+                          .key,
+                      details: TrackerService()
+                          .getData()
+                          .entries
+                          .elementAt(index)
+                          .value['details'],
+                      score: TrackerService()
+                          .getData()
+                          .entries
+                          .elementAt(index)
+                          .value['score'],
+                    );
+                  },
                 ),
               ),
             ],
