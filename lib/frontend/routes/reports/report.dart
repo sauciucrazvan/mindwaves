@@ -1,10 +1,12 @@
 // Generic imports
+import 'dart:math';
+
 import 'package:intl/intl.dart';
 import 'package:graphic/graphic.dart';
 import 'package:flutter/material.dart';
 
 // Frontend imports
-import 'package:mindwaves/frontend/config/palette.dart';
+import 'package:mindwaves/frontend/config/moods.dart';
 import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 
@@ -15,20 +17,33 @@ class WeeklyReport extends StatelessWidget {
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
 
-    const List<Map<String, dynamic>> dataMap = [
-      {'day': 'Mon', 'score': 4},
-      {'day': 'Tue', 'score': 1},
-      {'day': 'Wed', 'score': 3},
-      {'day': 'Thu', 'score': 4},
-      {'day': 'Fri', 'score': 1},
-      {'day': 'Sat', 'score': 2},
-      {'day': 'Sun', 'score': 5},
+    // Generate a map of colors for the graph
+    List<Color> moodColors = [];
+    moods.forEach((mood, details) => moodColors.add(details["color"]));
+
+    // Get the maximum score that can be achieved every week
+    int maxScore = 0;
+    moods.forEach((key, value) {
+      if (value["score"] > maxScore) maxScore = value["score"];
+    });
+
+    // Temporary random data, only for debug
+    List<Map<String, dynamic>> dataMap = [
+      {'day': 'Mon', 'score': 2 + Random().nextInt(maxScore - 2)},
+      {'day': 'Tue', 'score': 2 + Random().nextInt(maxScore - 2)},
+      {'day': 'Wed', 'score': 2 + Random().nextInt(maxScore - 2)},
+      {'day': 'Thu', 'score': 2 + Random().nextInt(maxScore - 2)},
+      {'day': 'Fri', 'score': 2 + Random().nextInt(maxScore - 2)},
+      {'day': 'Sat', 'score': 2 + Random().nextInt(maxScore - 2)},
+      {'day': 'Sun', 'score': 2 + Random().nextInt(maxScore - 2)},
     ];
 
     num totalScore =
         dataMap.fold(0, (num previousValue, Map<String, dynamic> element) {
       return previousValue + element['score'];
     });
+
+    maxScore *= 7;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -88,7 +103,7 @@ class WeeklyReport extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Your weekly score is $totalScore/35.",
+                      "Your weekly score is $totalScore/$maxScore.",
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 4),

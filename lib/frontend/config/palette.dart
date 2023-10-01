@@ -29,11 +29,3 @@ ThemeData darkTheme = ThemeData(
         color: Color(0xFFFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
   ),
 );
-
-const moodColors = [
-  Color(0xFF81171B), // Very sad
-  Color(0xFFAD2E24), // Sad
-  Color(0xFFDD6E42), // Meh
-  Color(0xFF329F5B), // Okay
-  Color(0xFF0C8346), // Good
-];

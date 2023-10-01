@@ -48,7 +48,11 @@ class _SettingsPanelState extends State<SettingsPanel> {
               // Settings options
               LongButton(
                 title: "Clear history",
-                icon: Icons.manage_history,
+                trailing: const Icon(
+                  Icons.manage_history,
+                  size: 24,
+                  color: Colors.white,
+                ),
                 color: Theme.of(context).colorScheme.secondary,
                 onTap: () {},
               )

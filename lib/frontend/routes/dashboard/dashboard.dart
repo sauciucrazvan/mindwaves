@@ -1,15 +1,16 @@
 // Generic imports
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 // Frontend imports
-import 'package:mindwaves/frontend/config/palette.dart';
-import 'package:mindwaves/frontend/routes/dashboard/components/mood_selector.dart';
-import 'package:mindwaves/frontend/routes/history/history.dart';
-import 'package:mindwaves/frontend/routes/reports/report.dart';
-import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
-import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
+import 'package:mindwaves/frontend/config/moods.dart';
 import 'package:mindwaves/frontend/widgets/fields/field.dart';
+import 'package:mindwaves/frontend/routes/reports/report.dart';
+import 'package:mindwaves/frontend/routes/history/history.dart';
+import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
+import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
+import 'package:mindwaves/frontend/routes/dashboard/components/mood_selector.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -19,8 +20,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final PageController _pageController = PageController(
-      viewportFraction: 0.35, initialPage: moodColors.length ~/ 2);
+  final PageController _pageController =
+      PageController(viewportFraction: 0.35, initialPage: moods.length ~/ 2);
   final TextEditingController _detailsController = TextEditingController();
 
   @override
@@ -125,8 +126,9 @@ class _DashboardState extends State<Dashboard> {
                     width: MediaQuery.of(context).size.width - 100,
                     child: LongButton(
                       title: "Track the day",
-                      icon: Icons.equalizer,
-                      color: Theme.of(context).colorScheme.primary,
+                      trailing: Lottie.asset("assets/animations/chart.json",
+                          width: 32, height: 32),
+                      color: Theme.of(context).colorScheme.secondary,
                       onTap: () {},
                     ),
                   ),
@@ -150,7 +152,11 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       LongButton(
                         title: "Weekly report",
-                        icon: Icons.calendar_month,
+                        trailing: const Icon(
+                          Icons.calendar_month,
+                          size: 24,
+                          color: Colors.white,
+                        ),
                         color: Theme.of(context).colorScheme.secondary,
                         onTap: () => Navigator.push(
                           context,
@@ -162,7 +168,11 @@ class _DashboardState extends State<Dashboard> {
                       const SizedBox(height: 4),
                       LongButton(
                         title: "View history",
-                        icon: Icons.history,
+                        trailing: const Icon(
+                          Icons.history,
+                          size: 24,
+                          color: Colors.white,
+                        ),
                         color: Theme.of(context).colorScheme.secondary,
                         onTap: () => Navigator.push(
                           context,
@@ -174,7 +184,11 @@ class _DashboardState extends State<Dashboard> {
                       const SizedBox(height: 4),
                       LongButton(
                         title: "Settings",
-                        icon: Icons.settings,
+                        trailing: const Icon(
+                          Icons.settings,
+                          size: 24,
+                          color: Colors.white,
+                        ),
                         color: Theme.of(context).colorScheme.secondary,
                         onTap: () => Navigator.push(
                           context,
