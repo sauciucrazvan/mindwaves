@@ -1,5 +1,6 @@
 // Generic imports
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/config/moods.dart';
@@ -36,7 +37,8 @@ class _MoodSelectorState extends State<MoodSelector> {
           });
         },
         itemBuilder: (BuildContext context, int index) {
-          final color = moods.entries.elementAt(index).value["color"];
+          MapEntry mapEntry = moods.entries.elementAt(index);
+          final color = mapEntry.value["color"];
           final scaleFactor = (index == selectedIndex) ? 0.9 : 0.75;
 
           return Transform.scale(
@@ -58,13 +60,20 @@ class _MoodSelectorState extends State<MoodSelector> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
-                      moods.entries.elementAt(index).value["icon"],
-                      color: Colors.white,
-                      size: 32,
-                    ),
+                    if (mapEntry.value["icon"] is IconData)
+                      Icon(
+                        mapEntry.value["icon"],
+                        color: Colors.white,
+                        size: 32,
+                      ),
+                    if (mapEntry.value["icon"] is String)
+                      Lottie.asset(
+                        mapEntry.value["icon"],
+                        width: 38,
+                        height: 38,
+                      ),
                     Text(
-                      moods.entries.elementAt(index).key,
+                      mapEntry.key,
                       style: const TextStyle(color: Colors.white, fontSize: 14),
                     ),
                   ],

@@ -47,22 +47,13 @@ class History extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: TrackerService().getData().length,
                   itemBuilder: (context, index) {
+                    MapEntry mapEntry =
+                        TrackerService().getData().entries.elementAt(index);
+
                     return DayContainer(
-                      id: TrackerService()
-                          .getData()
-                          .entries
-                          .elementAt(index)
-                          .key,
-                      details: TrackerService()
-                          .getData()
-                          .entries
-                          .elementAt(index)
-                          .value['details'],
-                      score: TrackerService()
-                          .getData()
-                          .entries
-                          .elementAt(index)
-                          .value['score'],
+                      id: mapEntry.key,
+                      details: mapEntry.value['details'],
+                      score: mapEntry.value['score'],
                     );
                   },
                 ),

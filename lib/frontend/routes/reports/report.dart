@@ -20,7 +20,11 @@ class WeeklyReport extends StatelessWidget {
 
     // Generate a map of colors for the graph
     List<Color> moodColors = [];
-    moods.forEach((mood, details) => moodColors.add(details["color"]));
+    moods.forEach((key, value) => moodColors.add(value["color"]));
+
+    List<double> scoreStops = [];
+    moods.forEach(
+        (key, value) => scoreStops.add((value['score'] as int).toDouble()));
 
     // Get the maximum score that can be achieved every week
     int maxScore = 0;
@@ -28,23 +32,14 @@ class WeeklyReport extends StatelessWidget {
       if (value["score"] > maxScore) maxScore = value["score"];
     });
 
-    // // Temporary random data, only for debug
-    // List<Map<String, dynamic>> dataMap = [
-    //   {'day': 'Mon', 'score': Random().nextInt(maxScore) + 1},
-    //   {'day': 'Tue', 'score': Random().nextInt(maxScore) + 1},
-    //   {'day': 'Wed', 'score': Random().nextInt(maxScore) + 1},
-    //   {'day': 'Thu', 'score': Random().nextInt(maxScore) + 1},
-    //   {'day': 'Fri', 'score': Random().nextInt(maxScore) + 1},
-    //   {'day': 'Sat', 'score': Random().nextInt(maxScore) + 1},
-    //   {'day': 'Sun', 'score': Random().nextInt(maxScore) + 1},
-    // ];
-
+    // Get the user data and fetch it
     Map<dynamic, dynamic> dataMap = TrackerService().getData();
     List<Map<String, dynamic>> chartData = [];
 
     int dayCounter = 1;
     dataMap.forEach((date, details) {
-      if (dayCounter > 7) return; // Keep a maximum of 7 days in the report
+      if (dayCounter > 7)
+        return; // Keep a maximum of 7 days in the report | TODO: Remove the data if the user requested it
 
       chartData.add({
         'day': DateFormat('E').format(DateTime.parse(date)),
@@ -99,12 +94,19 @@ class WeeklyReport extends StatelessWidget {
                       accessor: (Map map) => map['day'] as String,
                     ),
                     'score': Variable(
-                      accessor: (Map map) => map['score'] as num,
+                      accessor: (Map map) => map['score'] as int,
                     ),
                   },
                   marks: [
                     IntervalMark(
-                      color: ColorEncode(variable: 'score', values: moodColors),
+                      transition: Transition(
+                          duration: const Duration(milliseconds: 1000),
+                          curve: Curves.easeInOutCubic),
+                      color: ColorEncode(
+                        variable: 'score',
+                        values: moodColors,
+                        stops: scoreStops,
+                      ),
                     )
                   ],
                   axes: [Defaults.horizontalAxis],
