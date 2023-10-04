@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+// Generic imports
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 class DayContainer extends StatelessWidget {
   final String id;

@@ -15,7 +15,7 @@ class ConfirmDialog extends StatelessWidget {
     return AlertDialog(
       title: Center(
         child: Image.asset(
-          "assets/images/AppIcon.png",
+          "assets/images/Mindwaves.png",
           width: 32,
           height: 32,
         ),

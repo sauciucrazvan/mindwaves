@@ -148,9 +148,10 @@ class _DashboardState extends State<Dashboard> {
                         } else {
                           _detailsController.clear();
                           showElevatedNotification(
-                              context,
-                              "Successfully tracked the day.",
-                              Colors.lightGreen.shade700);
+                            context,
+                            "Successfully tracked the day.",
+                            Colors.lightGreen.shade700,
+                          );
                         }
                       },
                     ),
