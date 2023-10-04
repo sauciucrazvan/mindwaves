@@ -61,9 +61,13 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 onTap: () => showDialog(
                   context: context,
                   builder: (context) => ConfirmDialog(
-                      title:
-                          "Are you sure you want to clear your entire history?\nThis action cannot be undone!",
-                      confirm: () => TrackerService().clearData()),
+                    title:
+                        "Are you sure you want to clear your entire history?\nThis action cannot be undone!",
+                    confirm: () {
+                      TrackerService().clearData();
+                      Navigator.pop(context); // close the dialog
+                    },
+                  ),
                 ),
               ),
             ],

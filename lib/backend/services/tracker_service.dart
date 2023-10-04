@@ -2,6 +2,9 @@
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 
+// Backend imports
+import 'package:mindwaves/backend/services/encryption_service.dart';
+
 class TrackerService {
   final _masterBox = Hive.box('mindwaves');
 
@@ -11,7 +14,15 @@ class TrackerService {
 
     if (_masterBox.get(id) != null) return false;
 
-    _masterBox.put(id, {'score': score, 'details': details});
+    String iv = '';
+    if (details != null && details.isNotEmpty) {
+      Map disposableMap = EncryptionService().encryptText(details);
+
+      details = disposableMap.keys.first;
+      iv = disposableMap.values.first;
+    }
+
+    _masterBox.put(id, {'score': score, 'details': details, 'iv': iv});
     return true;
   }
 
@@ -25,7 +36,32 @@ class TrackerService {
   }
 
   Map<dynamic, dynamic> getData() {
-    return _masterBox.toMap();
+    // Generate a map with decrypted details
+    Map dataMap = _masterBox.toMap();
+    Map factoryMap = {};
+
+    dataMap.forEach((key, value) {
+      if (value is Map) {
+        if (value.keys.contains('iv')) {
+          // is encrypted, has text
+
+          String decryptedText =
+              EncryptionService().decryptText(value['details'], value['iv']);
+          factoryMap[key] = {
+            'score': value['score'],
+            'details': decryptedText,
+          };
+        } else {
+          // no text, return just the score and plan details
+          factoryMap[key] = {
+            'score': value['score'],
+            'details': value['details']
+          };
+        }
+      }
+    });
+
+    return factoryMap;
   }
 
   void clearData() => _masterBox.clear();
