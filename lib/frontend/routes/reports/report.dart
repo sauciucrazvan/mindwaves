@@ -1,9 +1,10 @@
 // Generic imports
-import 'dart:math';
-
 import 'package:intl/intl.dart';
 import 'package:graphic/graphic.dart';
 import 'package:flutter/material.dart';
+
+// Backend imports
+import 'package:mindwaves/backend/services/tracker_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/config/moods.dart';
@@ -27,19 +28,33 @@ class WeeklyReport extends StatelessWidget {
       if (value["score"] > maxScore) maxScore = value["score"];
     });
 
-    // Temporary random data, only for debug
-    List<Map<String, dynamic>> dataMap = [
-      {'day': 'Mon', 'score': Random().nextInt(maxScore) + 1},
-      {'day': 'Tue', 'score': Random().nextInt(maxScore) + 1},
-      {'day': 'Wed', 'score': Random().nextInt(maxScore) + 1},
-      {'day': 'Thu', 'score': Random().nextInt(maxScore) + 1},
-      {'day': 'Fri', 'score': Random().nextInt(maxScore) + 1},
-      {'day': 'Sat', 'score': Random().nextInt(maxScore) + 1},
-      {'day': 'Sun', 'score': Random().nextInt(maxScore) + 1},
-    ];
+    // // Temporary random data, only for debug
+    // List<Map<String, dynamic>> dataMap = [
+    //   {'day': 'Mon', 'score': Random().nextInt(maxScore) + 1},
+    //   {'day': 'Tue', 'score': Random().nextInt(maxScore) + 1},
+    //   {'day': 'Wed', 'score': Random().nextInt(maxScore) + 1},
+    //   {'day': 'Thu', 'score': Random().nextInt(maxScore) + 1},
+    //   {'day': 'Fri', 'score': Random().nextInt(maxScore) + 1},
+    //   {'day': 'Sat', 'score': Random().nextInt(maxScore) + 1},
+    //   {'day': 'Sun', 'score': Random().nextInt(maxScore) + 1},
+    // ];
+
+    Map<dynamic, dynamic> dataMap = TrackerService().getData();
+    List<Map<String, dynamic>> chartData = [];
+
+    int dayCounter = 1;
+    dataMap.forEach((date, details) {
+      if (dayCounter > 7) return; // Keep a maximum of 7 days in the report
+
+      chartData.add({
+        'day': DateFormat('E').format(DateTime.parse(date)),
+        'score': details['score']
+      });
+      dayCounter++;
+    });
 
     num totalScore =
-        dataMap.fold(0, (num previousValue, Map<String, dynamic> element) {
+        chartData.fold(0, (num previousValue, Map<String, dynamic> element) {
       return previousValue + element['score'];
     });
 
@@ -78,7 +93,7 @@ class WeeklyReport extends StatelessWidget {
                 height: 150,
                 width: MediaQuery.of(context).size.width - 50,
                 child: Chart(
-                  data: dataMap,
+                  data: chartData,
                   variables: {
                     'day': Variable(
                       accessor: (Map map) => map['day'] as String,
