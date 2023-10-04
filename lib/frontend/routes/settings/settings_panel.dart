@@ -7,6 +7,7 @@ import 'package:mindwaves/backend/services/tracker_service.dart';
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
+import 'package:mindwaves/frontend/widgets/dialogs/confirm_dialog.dart';
 
 class SettingsPanel extends StatefulWidget {
   const SettingsPanel({super.key});
@@ -57,9 +58,14 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   color: Colors.white,
                 ),
                 color: Theme.of(context).colorScheme.secondary,
-                onTap: () => TrackerService()
-                    .clearData(), // TODO: Add confirmation dialog
-              )
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (context) => ConfirmDialog(
+                      title:
+                          "Are you sure you want to clear your entire history?\nThis action cannot be undone!",
+                      confirm: () => TrackerService().clearData()),
+                ),
+              ),
             ],
           ),
         ),
