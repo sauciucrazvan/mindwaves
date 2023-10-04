@@ -94,20 +94,23 @@ class WeeklyReport extends StatelessWidget {
                       accessor: (Map map) => map['day'] as String,
                     ),
                     'score': Variable(
-                      accessor: (Map map) => map['score'] as int,
+                      accessor: (Map map) => map['score'] as num,
+                      scale: LinearScale(min: 0, max: maxScore / 7),
                     ),
                   },
                   marks: [
                     IntervalMark(
+                      label: LabelEncode(
+                          encoder: (value) => Label(value['score'].toString())),
                       transition: Transition(
-                          duration: const Duration(milliseconds: 1000),
-                          curve: Curves.easeInOutCubic),
+                        duration: const Duration(milliseconds: 1000),
+                        curve: Curves.easeInOutCubic,
+                      ),
                       color: ColorEncode(
                         variable: 'score',
                         values: moodColors,
-                        stops: scoreStops,
                       ),
-                    )
+                    ),
                   ],
                   axes: [Defaults.horizontalAxis],
                 ),
