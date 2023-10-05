@@ -22,10 +22,6 @@ class WeeklyReport extends StatelessWidget {
     List<Color> moodColors = [];
     moods.forEach((key, value) => moodColors.add(value["color"]));
 
-    List<double> scoreStops = [];
-    moods.forEach(
-        (key, value) => scoreStops.add((value['score'] as int).toDouble()));
-
     // Get the maximum score that can be achieved every week
     int maxScore = 0;
     moods.forEach((key, value) {
@@ -38,8 +34,9 @@ class WeeklyReport extends StatelessWidget {
 
     int dayCounter = 1;
     dataMap.forEach((date, details) {
-      if (dayCounter > 7)
+      if (dayCounter > 7) {
         return; // Keep a maximum of 7 days in the report | TODO: Remove the data if the user requested it
+      }
 
       chartData.add({
         'day': DateFormat('E').format(DateTime.parse(date)),
