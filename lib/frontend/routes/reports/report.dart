@@ -32,17 +32,17 @@ class WeeklyReport extends StatelessWidget {
     Map<dynamic, dynamic> dataMap = TrackerService().getData();
     List<Map<String, dynamic>> chartData = [];
 
-    int dayCounter = 1;
     dataMap.forEach((date, details) {
-      if (dayCounter > 7) {
+      DateTime reportDate = DateTime.parse(date);
+      if (DateTime.now()
+          .isBefore(reportDate.subtract(const Duration(days: 7)))) {
         return; // Keep a maximum of 7 days in the report | TODO: Remove the data if the user requested it
       }
 
       chartData.add({
-        'day': DateFormat('E').format(DateTime.parse(date)),
+        'day': DateFormat('E').format(reportDate),
         'score': details['score']
       });
-      dayCounter++;
     });
 
     num totalScore =
