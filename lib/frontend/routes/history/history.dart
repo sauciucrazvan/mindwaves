@@ -47,8 +47,9 @@ class History extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: TrackerService().getData().length,
                   itemBuilder: (context, index) {
-                    MapEntry mapEntry =
-                        TrackerService().getData().entries.elementAt(index);
+                    List<MapEntry<dynamic, dynamic>> entries =
+                        TrackerService().getData().entries.toList();
+                    MapEntry mapEntry = entries.reversed.elementAt(index);
 
                     return DayContainer(
                       id: mapEntry.key,
