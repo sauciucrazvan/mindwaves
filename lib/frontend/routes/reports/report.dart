@@ -34,8 +34,8 @@ class WeeklyReport extends StatelessWidget {
 
     dataMap.forEach((date, details) {
       DateTime reportDate = DateTime.parse(date);
-      if (DateTime.now()
-          .isBefore(reportDate.subtract(const Duration(days: 7)))) {
+      if (reportDate
+          .isBefore(DateTime.now().subtract(const Duration(days: 7)))) {
         return; // Keep a maximum of 7 days in the report | TODO: Remove the data if the user requested it
       }
 
