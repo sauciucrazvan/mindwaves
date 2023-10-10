@@ -78,7 +78,7 @@ class DayContainer extends StatelessWidget {
                           Row(
                             children: [
                               Icon(
-                                Icons.edit_document,
+                                Icons.description,
                                 color: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
