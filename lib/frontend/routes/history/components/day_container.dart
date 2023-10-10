@@ -76,6 +76,8 @@ class DayContainer extends StatelessWidget {
                         ),
                         if (details.isNotEmpty)
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Icon(
                                 Icons.description,
