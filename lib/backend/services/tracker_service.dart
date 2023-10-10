@@ -42,7 +42,8 @@ class TrackerService {
 
     dataMap.forEach((key, value) {
       if (value is Map) {
-        if (value.keys.contains('iv')) {
+        if (value.keys.contains('iv') &&
+            (value['details'] as String).isNotEmpty) {
           // is encrypted, has text
 
           String decryptedText =
