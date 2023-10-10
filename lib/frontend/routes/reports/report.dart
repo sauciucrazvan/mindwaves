@@ -66,112 +66,116 @@ class WeeklyReport extends StatelessWidget {
         leading: const LeadingButton(),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Report title
-              Text(
-                "Your weekly report",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-
-              const SizedBox(height: 16),
-
-              // Weekly report graph
-              SizedBox(
-                height: 150,
-                width: MediaQuery.of(context).size.width - 50,
-                child: Chart(
-                  data: chartData,
-                  variables: {
-                    'day': Variable(
-                      accessor: (Map map) => map['day'] as String,
-                    ),
-                    'score': Variable(
-                      accessor: (Map map) => map['score'] as num,
-                      scale: LinearScale(min: 0, max: maxScore / 7),
-                    ),
-                  },
-                  marks: [
-                    IntervalMark(
-                      label: LabelEncode(
-                          encoder: (value) => Label(value['score'].toString())),
-                      transition: Transition(
-                        duration: const Duration(milliseconds: 1000),
-                        curve: Curves.easeInOutCubic,
-                      ),
-                      color: ColorEncode(
-                        variable: 'score',
-                        values: moodColors,
-                      ),
-                    ),
-                  ],
-                  axes: [Defaults.horizontalAxis],
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Score report
-              Center(
-                child: Column(
-                  children: [
-                    Text(
-                      "Your weekly score is $totalScore/$maxScore.",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      "Report generated on ${DateFormat('MMM dd, yyyy').format(DateTime.now())}.",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 16),
-              const Divider(),
-              const SizedBox(height: 16),
-
-              // Improvements category ~ should be refactored in the future
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Text(
-                  "How can you improve your mood level?",
+        child: SingleChildScrollView(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Report title
+                Text(
+                  "Your weekly report",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-              ),
 
-              const SizedBox(height: 12),
+                const SizedBox(height: 16),
 
-              Text(
-                "AI Improvements is turned off in the settings.",
-                style: TextStyle(
-                  color: Colors.red[400],
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsPanel(),
+                // Weekly report graph
+                SizedBox(
+                  height: 150,
+                  width: MediaQuery.of(context).size.width - 50,
+                  child: Chart(
+                    data: chartData,
+                    variables: {
+                      'day': Variable(
+                        accessor: (Map map) => map['day'] as String,
+                      ),
+                      'score': Variable(
+                        accessor: (Map map) => map['score'] as num,
+                        scale: LinearScale(min: 0, max: maxScore / 7),
+                      ),
+                    },
+                    marks: [
+                      IntervalMark(
+                        label: LabelEncode(
+                            encoder: (value) =>
+                                Label(value['score'].toString())),
+                        transition: Transition(
+                          duration: const Duration(milliseconds: 1000),
+                          curve: Curves.easeInOutCubic,
+                        ),
+                        color: ColorEncode(
+                          variable: 'score',
+                          values: moodColors,
+                        ),
+                      ),
+                    ],
+                    axes: [Defaults.horizontalAxis],
                   ),
                 ),
-                child: const Text(
-                  "Turn it on on the settings page.",
+
+                const SizedBox(height: 16),
+
+                // Score report
+                Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Your weekly score is $totalScore/$maxScore.",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "Report generated on ${DateFormat('MMM dd, yyyy').format(DateTime.now())}.",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+                const Divider(),
+                const SizedBox(height: 16),
+
+                // Improvements category ~ should be refactored in the future
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Text(
+                    "How can you improve your mood level?",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                Text(
+                  "AI Improvements is turned off in the settings.",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.red[400],
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ],
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsPanel(),
+                    ),
+                  ),
+                  child: const Text(
+                    "Turn it on on the settings page.",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
