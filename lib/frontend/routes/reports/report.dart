@@ -123,7 +123,7 @@ class WeeklyReport extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Your weekly score is $totalScore/$maxScore.",
+                        "Your weekly happiness score is ${((totalScore / maxScore) * 100).round()}%.",
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       const SizedBox(height: 4),
