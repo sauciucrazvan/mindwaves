@@ -182,9 +182,23 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 const SizedBox(height: 4),
                 const Divider(),
 
-                // Settings options
+                // Clear todays data
                 LongButton(
-                  title: "Clear history",
+                  title: "Delete today's data",
+                  trailing: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                    size: 24,
+                  ),
+                  color: Theme.of(context).colorScheme.secondary,
+                  onTap: () => TrackerService().deleteDay(),
+                ),
+
+                const SizedBox(height: 4),
+
+                // Clear entire history
+                LongButton(
+                  title: "Clear entire history",
                   trailing: const Icon(
                     Icons.manage_history,
                     size: 24,

@@ -158,22 +158,6 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
 
-                const SizedBox(height: 4),
-
-                // Debug delete button
-
-                Center(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width - 100,
-                    child: LongButton(
-                      title: "Delete today's data",
-                      trailing: const Icon(Icons.delete, color: Colors.red),
-                      color: Theme.of(context).colorScheme.secondary,
-                      onTap: () => TrackerService().deleteDay(),
-                    ),
-                  ),
-                ),
-
                 const Divider(),
                 const SizedBox(height: 16),
 
