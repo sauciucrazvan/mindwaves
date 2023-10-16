@@ -29,15 +29,24 @@ class WeeklyReport extends StatelessWidget {
       if (value["score"] > maxScore) maxScore = value["score"];
     });
 
+    SettingsService settingsService = SettingsService();
+    TrackerService trackerService = TrackerService();
+
+    bool hideGraph = settingsService.getSettingValue('hide-graph-visibility');
+    bool aiImprovements = settingsService.getSettingValue('ai-improvements');
+    bool removeOldData = settingsService.getSettingValue('remove-old-data');
+
     // Get the user data and fetch it
-    Map<dynamic, dynamic> dataMap = TrackerService().getData();
+    Map<dynamic, dynamic> dataMap = trackerService.getData();
     List<Map<String, dynamic>> chartData = [];
 
     dataMap.forEach((date, details) {
       DateTime reportDate = DateTime.parse(date);
       if (reportDate
           .isBefore(DateTime.now().subtract(const Duration(days: 7)))) {
-        return; // Keep a maximum of 7 days in the report | TODO: Remove the data if the user requested it
+        if (!removeOldData) return;
+        trackerService.getDataMap().delete(date);
+        return; // Keep a maximum of 7 days in the report
       }
 
       chartData.add({
@@ -52,8 +61,6 @@ class WeeklyReport extends StatelessWidget {
     });
 
     maxScore *= 7;
-
-    bool hideGraph = SettingsService().getSettingValue('hide-graph-visibility');
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -144,41 +151,43 @@ class WeeklyReport extends StatelessWidget {
                 const Divider(),
                 const SizedBox(height: 16),
 
-                // Improvements category ~ should be refactored in the future
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Text(
-                    "How can you improve your mood level?",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-
-                Text(
-                  "AI Improvements is turned off in the settings.",
-                  style: TextStyle(
-                    color: Colors.red[400],
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SettingsPanel(),
+                if (!aiImprovements) ...[
+                  // Improvements category ~ should be refactored in the future
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Text(
+                      "How can you improve your mood level?",
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
-                  child: const Text(
-                    "Turn it on on the settings page.",
+
+                  const SizedBox(height: 12),
+
+                  Text(
+                    "AI Improvements is turned off in the settings.",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.red[400],
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPanel(),
+                      ),
+                    ),
+                    child: const Text(
+                      "Turn it on on the settings page.",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

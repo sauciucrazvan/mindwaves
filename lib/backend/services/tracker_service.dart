@@ -65,5 +65,6 @@ class TrackerService {
     return factoryMap;
   }
 
+  Box getDataMap() => _masterBox;
   void clearData() => _masterBox.clear();
 }

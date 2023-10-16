@@ -64,9 +64,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
 
-                const SizedBox(height: 16),
-
-                const SizedBox(height: 4),
+                const SizedBox(height: 20),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
