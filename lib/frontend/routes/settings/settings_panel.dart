@@ -1,5 +1,6 @@
 // Generic imports
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 // Backend imports
 import 'package:mindwaves/backend/services/tracker_service.dart';
@@ -59,7 +60,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
               children: [
                 // Settings title
                 Text(
-                  "Settings panel",
+                  "Settings Panel",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
 
@@ -68,48 +69,16 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 const SizedBox(height: 4),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Actions",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 4),
-                const Divider(),
-
-                // Settings options
-                LongButton(
-                  title: "Clear history",
-                  trailing: const Icon(
-                    Icons.manage_history,
-                    size: 24,
-                    color: Colors.white,
-                  ),
-                  color: Theme.of(context).colorScheme.secondary,
-                  onTap: () => showDialog(
-                    context: context,
-                    builder: (context) => ConfirmDialog(
-                      title:
-                          "Are you sure you want to clear your entire history?\nThis action cannot be undone!",
-                      confirm: () {
-                        TrackerService().clearData();
-                        Navigator.pop(context); // close the dialog
-                      },
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Options",
                       style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    Lottie.asset(
+                      "assets/animations/options.json",
+                      width: 32,
+                      height: 32,
                     ),
                   ],
                 ),
@@ -193,6 +162,48 @@ class _SettingsPanelState extends State<SettingsPanel> {
                       },
                     ),
                   ],
+                ),
+
+                const SizedBox(height: 16),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Actions",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    Lottie.asset(
+                      "assets/animations/actions.json",
+                      width: 32,
+                      height: 32,
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 4),
+                const Divider(),
+
+                // Settings options
+                LongButton(
+                  title: "Clear history",
+                  trailing: const Icon(
+                    Icons.manage_history,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                  color: Theme.of(context).colorScheme.secondary,
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => ConfirmDialog(
+                      title:
+                          "Are you sure you want to clear your entire history?\nThis action cannot be undone!",
+                      confirm: () {
+                        TrackerService().clearData();
+                        Navigator.pop(context); // close the dialog
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
