@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 // Backend imports
 import 'package:mindwaves/backend/services/tracker_service.dart';
+import 'package:mindwaves/backend/services/settings_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/config/moods.dart';
@@ -52,6 +53,8 @@ class WeeklyReport extends StatelessWidget {
 
     maxScore *= 7;
 
+    bool hideGraph = SettingsService().getSettingValue('hide-graph-visibility');
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -82,41 +85,43 @@ class WeeklyReport extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Weekly report graph
-                SizedBox(
-                  height: 150,
-                  width: MediaQuery.of(context).size.width - 50,
-                  child: Chart(
-                    data: chartData,
-                    variables: {
-                      'day': Variable(
-                        accessor: (Map map) => map['day'] as String,
-                      ),
-                      'score': Variable(
-                        accessor: (Map map) => map['score'] as num,
-                        scale: LinearScale(min: 0, max: maxScore / 7),
-                      ),
-                    },
-                    marks: [
-                      IntervalMark(
-                        label: LabelEncode(
-                            encoder: (value) =>
-                                Label(value['score'].toString())),
-                        transition: Transition(
-                          duration: const Duration(milliseconds: 1000),
-                          curve: Curves.easeInOutCubic,
+                if (!hideGraph) ...[
+                  // Weekly report graph
+                  SizedBox(
+                    height: 150,
+                    width: MediaQuery.of(context).size.width - 50,
+                    child: Chart(
+                      data: chartData,
+                      variables: {
+                        'day': Variable(
+                          accessor: (Map map) => map['day'] as String,
                         ),
-                        color: ColorEncode(
-                          variable: 'score',
-                          values: moodColors,
+                        'score': Variable(
+                          accessor: (Map map) => map['score'] as num,
+                          scale: LinearScale(min: 0, max: maxScore / 7),
                         ),
-                      ),
-                    ],
-                    axes: [Defaults.horizontalAxis],
+                      },
+                      marks: [
+                        IntervalMark(
+                          label: LabelEncode(
+                              encoder: (value) =>
+                                  Label(value['score'].toString())),
+                          transition: Transition(
+                            duration: const Duration(milliseconds: 1000),
+                            curve: Curves.easeInOutCubic,
+                          ),
+                          color: ColorEncode(
+                            variable: 'score',
+                            values: moodColors,
+                          ),
+                        ),
+                      ],
+                      axes: [Defaults.horizontalAxis],
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
+                ],
 
                 // Score report
                 Center(

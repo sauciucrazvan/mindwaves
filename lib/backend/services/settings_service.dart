@@ -5,7 +5,8 @@ class SettingsService {
   final _settingsBox = Hive.box("mindwaves_options");
 
   dynamic getSettingValue(String setting) {
-    return _settingsBox.get(setting);
+    if (_settingsBox.get(setting) != null) return _settingsBox.get(setting);
+    return false;
   }
 
   void setSettingValue(String setting, dynamic value) {

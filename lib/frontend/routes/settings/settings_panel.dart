@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 // Backend imports
 import 'package:mindwaves/backend/services/tracker_service.dart';
+import 'package:mindwaves/backend/services/settings_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
 import 'package:mindwaves/frontend/widgets/dialogs/confirm_dialog.dart';
+import 'package:mindwaves/frontend/widgets/notifications/elevated_notification.dart';
 
 class SettingsPanel extends StatefulWidget {
   const SettingsPanel({super.key});
@@ -71,6 +73,34 @@ class _SettingsPanelState extends State<SettingsPanel> {
                       },
                     ),
                   ),
+                ),
+
+                const SizedBox(height: 4),
+
+                LongButton(
+                  title: "Toggle graph",
+                  trailing: const Icon(
+                    Icons.track_changes,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                  color: Theme.of(context).colorScheme.secondary,
+                  onTap: () {
+                    SettingsService settingsService = SettingsService();
+
+                    bool currentValue = settingsService
+                        .getSettingValue('hide-graph-visibility');
+
+                    settingsService.setSettingValue(
+                        'hide-graph-visibility', !currentValue);
+
+                    showElevatedNotification(
+                        context,
+                        currentValue
+                            ? "The smurfs made the graph visible again! :)"
+                            : "Successfully hidden the weekly report graph.",
+                        Colors.lightGreen.shade700);
+                  },
                 ),
               ],
             ),
