@@ -51,7 +51,7 @@ class WeeklyReport extends StatelessWidget {
       }
 
       chartData.add({
-        'day': '${DateFormat('E').format(reportDate)} (${details['score']})',
+        'day': '${DateFormat('E').format(reportDate)} (+${details['score']})',
         'score': details['score']
       });
     });
