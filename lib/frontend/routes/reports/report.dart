@@ -9,7 +9,6 @@ import 'package:mindwaves/backend/services/settings_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/config/moods.dart';
-import 'package:mindwaves/frontend/routes/settings/settings_panel.dart';
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 
 class WeeklyReport extends StatelessWidget {
@@ -45,7 +44,9 @@ class WeeklyReport extends StatelessWidget {
       if (reportDate
           .isBefore(DateTime.now().subtract(const Duration(days: 7)))) {
         if (!removeOldData) return;
-        trackerService.getDataMap().delete(date);
+        trackerService
+            .getDataMap()
+            .delete(date); // Remove data if the user requests it
         return; // Keep a maximum of 7 days in the report
       }
 
@@ -128,20 +129,21 @@ class WeeklyReport extends StatelessWidget {
                 ],
 
                 // Score report
-                Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        "Your weekly happiness score is ${((totalScore / maxScore) * 100).round()}%.",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "Report generated on ${DateFormat('MMM dd, yyyy').format(DateTime.now())}.",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Your weekly happiness score is ${((totalScore / maxScore) * 100).round()}%.",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "Report generated on ${DateFormat('MMM dd, yyyy').format(DateTime.now())}.",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
                 ),
 
                 const SizedBox(height: 16),
@@ -161,27 +163,11 @@ class WeeklyReport extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   Text(
-                    "AI Improvements is turned off in the settings.",
+                    "AI Improvements is turned off in the settings. Turn it on to receieve recommendations!",
                     style: TextStyle(
                       color: Colors.red[400],
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsPanel(),
-                      ),
-                    ),
-                    child: const Text(
-                      "Turn it on on the settings page.",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ),
                 ],
