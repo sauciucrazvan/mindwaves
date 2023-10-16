@@ -19,7 +19,9 @@ import 'package:mindwaves/backend/handlers/app_handler.dart';
 
 void main() async {
   await Hive.initFlutter(); // Initialize Hive for Flutter
-  Hive.openBox("mindwaves"); // Open the Hive box that represents the app
+  Hive.openBox("mindwaves"); // Open the Hive box that represents the app data
+  Hive.openBox(
+      "mindwaves_options"); // Open the Hive box that represents the app settings
 
   runApp(const Mindwaves());
 }
