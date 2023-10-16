@@ -9,7 +9,6 @@ import 'package:mindwaves/backend/services/settings_service.dart';
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
 import 'package:mindwaves/frontend/widgets/dialogs/confirm_dialog.dart';
-import 'package:mindwaves/frontend/widgets/notifications/elevated_notification.dart';
 
 class SettingsPanel extends StatefulWidget {
   const SettingsPanel({super.key});
@@ -19,8 +18,21 @@ class SettingsPanel extends StatefulWidget {
 }
 
 class _SettingsPanelState extends State<SettingsPanel> {
+  final SettingsService _settingsService = SettingsService();
+
+  bool graphVisibility = false, removeOldData = false, aiImprovements = false;
+
+  @override
+  void initState() {
+    aiImprovements = _settingsService.getSettingValue('ai-improvements');
+    graphVisibility = _settingsService.getSettingValue('hide-graph-visibility');
+    removeOldData = _settingsService.getSettingValue('remove-old-data');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).colorScheme.primary;
     Color backgroundColor = Theme.of(context).colorScheme.background;
 
     return Scaffold(
@@ -53,6 +65,21 @@ class _SettingsPanelState extends State<SettingsPanel> {
 
                 const SizedBox(height: 16),
 
+                const SizedBox(height: 4),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Actions",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 4),
+                const Divider(),
+
                 // Settings options
                 LongButton(
                   title: "Clear history",
@@ -75,32 +102,97 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   ),
                 ),
 
+                const SizedBox(height: 16),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Options",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                ),
+
                 const SizedBox(height: 4),
+                const Divider(),
 
-                LongButton(
-                  title: "Toggle graph",
-                  trailing: const Icon(
-                    Icons.track_changes,
-                    size: 24,
-                    color: Colors.white,
-                  ),
-                  color: Theme.of(context).colorScheme.secondary,
-                  onTap: () {
-                    SettingsService settingsService = SettingsService();
+                // Toggle AI Recommendations
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text(
+                        "AI Improvements",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    Switch(
+                      activeColor: primaryColor,
+                      value: aiImprovements,
+                      onChanged: (value) {
+                        setState(() {
+                          _settingsService.setSettingValue(
+                              'ai-improvements', value);
 
-                    bool currentValue = settingsService
-                        .getSettingValue('hide-graph-visibility');
+                          aiImprovements = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
 
-                    settingsService.setSettingValue(
-                        'hide-graph-visibility', !currentValue);
+                // Hide the weekly report graph
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text(
+                        "Hide weekly report graph",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    Switch(
+                      activeColor: primaryColor,
+                      value: graphVisibility,
+                      onChanged: (value) {
+                        setState(() {
+                          _settingsService.setSettingValue(
+                              'hide-graph-visibility', value);
 
-                    showElevatedNotification(
-                        context,
-                        currentValue
-                            ? "The smurfs made the graph visible again! :)"
-                            : "Successfully hidden the weekly report graph.",
-                        Colors.lightGreen.shade700);
-                  },
+                          graphVisibility = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+
+                // Remove data older than 7 days
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text(
+                        "Auto-remove passed data",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    Switch(
+                      activeColor: primaryColor,
+                      value: removeOldData,
+                      onChanged: (value) {
+                        setState(() {
+                          _settingsService.setSettingValue(
+                              'remove-old-data', value);
+
+                          removeOldData = value;
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
