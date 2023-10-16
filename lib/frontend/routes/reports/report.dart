@@ -50,7 +50,7 @@ class WeeklyReport extends StatelessWidget {
       }
 
       chartData.add({
-        'day': DateFormat('E').format(reportDate),
+        'day': '${DateFormat('E').format(reportDate)} (${details['score']})',
         'score': details['score']
       });
     });
@@ -110,9 +110,6 @@ class WeeklyReport extends StatelessWidget {
                       },
                       marks: [
                         IntervalMark(
-                          label: LabelEncode(
-                              encoder: (value) =>
-                                  Label(value['score'].toString())),
                           transition: Transition(
                             duration: const Duration(milliseconds: 1000),
                             curve: Curves.easeInOutCubic,
