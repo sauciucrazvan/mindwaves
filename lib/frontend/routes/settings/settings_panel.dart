@@ -191,7 +191,17 @@ class _SettingsPanelState extends State<SettingsPanel> {
                     size: 24,
                   ),
                   color: Theme.of(context).colorScheme.secondary,
-                  onTap: () => TrackerService().deleteDay(),
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => ConfirmDialog(
+                      title:
+                          "Are you sure you want to delete the track for today?",
+                      confirm: () {
+                        TrackerService().deleteDay();
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
                 ),
 
                 const SizedBox(height: 4),
