@@ -5,11 +5,14 @@ import 'package:lottie/lottie.dart';
 // Backend imports
 import 'package:mindwaves/backend/services/tracker_service.dart';
 import 'package:mindwaves/backend/services/settings_service.dart';
+import 'package:mindwaves/backend/services/notification_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
+import 'package:mindwaves/frontend/widgets/buttons/small_button.dart';
 import 'package:mindwaves/frontend/widgets/dialogs/confirm_dialog.dart';
+import 'package:mindwaves/frontend/widgets/notifications/elevated_notification.dart';
 
 class SettingsPanel extends StatefulWidget {
   const SettingsPanel({super.key});
@@ -158,6 +161,55 @@ class _SettingsPanelState extends State<SettingsPanel> {
                           removeOldData = value;
                         });
                       },
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 4),
+
+                // Notification time
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text(
+                        "Send notification at",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          NotificationService().getNotificationTime(),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        SmallButton(
+                          icon: Icons.timer,
+                          color: Theme.of(context).colorScheme.primary,
+                          pressed: () async {
+                            TimeOfDay? selectedTime =
+                                await _settingsService.timePicker(context);
+
+                            if (selectedTime == null) return;
+
+                            setState(() {
+                              _settingsService.setSettingValue(
+                                  "notification-time", {
+                                "hour": selectedTime.hour.toString(),
+                                "minute": selectedTime.minute.toString()
+                              });
+                            });
+
+                            // ignore: use_build_context_synchronously
+                            showElevatedNotification(
+                              context,
+                              "Value updated. Taking action on the next track of a day!",
+                              Colors.lightGreen.shade700,
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),

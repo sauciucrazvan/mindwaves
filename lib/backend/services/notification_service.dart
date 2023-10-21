@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mindwaves/backend/services/settings_service.dart';
 import 'package:timezone/data/latest.dart' as timezones;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -67,5 +68,22 @@ class NotificationService {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
+  }
+
+  String getNotificationTime() {
+    if (SettingsService().getSettingValue("notification-time") is! Map) {
+      return "21:00";
+    }
+
+    final Map<dynamic, dynamic> notificationTime =
+        SettingsService().getSettingValue("notification-time");
+
+    final String hour = notificationTime["hour"];
+    final String minute = notificationTime["minute"];
+
+    final String hourString = hour.padLeft(2, '0');
+    final String minuteString = minute.padLeft(2, '0');
+
+    return '$hourString:$minuteString';
   }
 }

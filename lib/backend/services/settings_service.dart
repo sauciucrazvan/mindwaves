@@ -1,4 +1,5 @@
 // Generic imports
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 class SettingsService {
@@ -16,4 +17,9 @@ class SettingsService {
 
   // Reset to default values
   void resetSettings() => _settingsBox.clear();
+
+  // Time picker
+  Future<TimeOfDay?> timePicker(BuildContext context) {
+    return showTimePicker(context: context, initialTime: TimeOfDay.now());
+  }
 }
