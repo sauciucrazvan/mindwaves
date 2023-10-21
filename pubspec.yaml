@@ -16,8 +16,12 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
-  # Time formatting
-  intl: ^0.18.1
+  # Time related packages
+  intl: ^0.18.1 # formatting
+  timezone: ^0.9.2 # timezones
+
+  # Notifications!
+  flutter_local_notifications: ^16.1.0
 
   # Graphs
   graphic: ^2.2.0

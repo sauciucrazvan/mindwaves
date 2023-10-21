@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 
 // Backend imports
 import 'package:mindwaves/backend/services/encryption_service.dart';
+import 'package:mindwaves/backend/services/notification_service.dart';
 
 class TrackerService {
   final _masterBox = Hive.box('mindwaves');
@@ -23,6 +24,16 @@ class TrackerService {
     }
 
     _masterBox.put(id, {'score': score, 'details': details, 'iv': iv});
+
+    NotificationService().scheduleNotification(
+      // debug
+      id: 0,
+      title: "Track of the day",
+      body: "Received +$score score!",
+      scheduledNotificationDateTime: DateTime.now().add(
+        const Duration(seconds: 30),
+      ),
+    );
     return true;
   }
 
