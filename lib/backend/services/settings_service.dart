@@ -20,6 +20,15 @@ class SettingsService {
 
   // Time picker
   Future<TimeOfDay?> timePicker(BuildContext context) {
-    return showTimePicker(context: context, initialTime: TimeOfDay.now());
+    return showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child!,
+        );
+      },
+    );
   }
 }
