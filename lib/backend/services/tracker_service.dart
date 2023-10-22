@@ -26,21 +26,25 @@ class TrackerService {
 
     _masterBox.put(id, {'score': score, 'details': details, 'iv': iv});
 
-    int hour = SettingsService().getSettingValue("notification-time")['hour'],
-        minute =
-            SettingsService().getSettingValue("notification-time")['minute'];
+    SettingsService settingsService = SettingsService();
+    if (settingsService.getSettingValue('disable-notifications') == false) {
+      int hour = settingsService.getSettingValue("notification-time")['hour'] ??
+              21,
+          minute =
+              settingsService.getSettingValue("notification-time")['minute'] ??
+                  00;
 
-    DateTime today = DateTime.now(),
-        notificationTime =
-            DateTime(today.year, today.month, today.day, hour, minute)
-                .add(const Duration(days: 1));
-    NotificationService().scheduleNotification(
-      id: 0,
-      title: "Hey!",
-      body: "Don't forget about tracking your day!",
-      scheduledNotificationDateTime: notificationTime,
-    );
-    print(notificationTime);
+      DateTime today = DateTime.now(),
+          notificationTime =
+              DateTime(today.year, today.month, today.day, hour, minute)
+                  .add(const Duration(days: 1));
+      NotificationService().scheduleNotification(
+        id: 0,
+        title: "Hey!",
+        body: "Don't forget about tracking your day!",
+        scheduledNotificationDateTime: notificationTime,
+      );
+    }
     return true;
   }
 

@@ -24,7 +24,10 @@ class SettingsPanel extends StatefulWidget {
 class _SettingsPanelState extends State<SettingsPanel> {
   final SettingsService _settingsService = SettingsService();
 
-  bool graphVisibility = false, removeOldData = false, aiImprovements = false;
+  bool graphVisibility = false,
+      removeOldData = false,
+      aiImprovements = false,
+      disableNotifications = false;
 
   @override
   void initState() {
@@ -159,6 +162,32 @@ class _SettingsPanelState extends State<SettingsPanel> {
                               'remove-old-data', value);
 
                           removeOldData = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+
+                // Send reminders
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text(
+                        "Disable reminders",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    Switch(
+                      activeColor: primaryColor,
+                      value: disableNotifications,
+                      onChanged: (value) {
+                        setState(() {
+                          _settingsService.setSettingValue(
+                              'disable-notifications', value);
+
+                          disableNotifications = value;
                         });
                       },
                     ),
