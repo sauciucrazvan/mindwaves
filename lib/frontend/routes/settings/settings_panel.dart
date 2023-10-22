@@ -251,6 +251,12 @@ class _SettingsPanelState extends State<SettingsPanel> {
                       confirm: () {
                         TrackerService().deleteDay();
                         Navigator.pop(context);
+
+                        showElevatedNotification(
+                          context,
+                          "Action completed successfully.",
+                          Colors.lightGreen.shade700,
+                        );
                       },
                     ),
                   ),

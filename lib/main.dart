@@ -20,13 +20,16 @@ import 'package:mindwaves/backend/services/notification_service.dart';
 
 void main() async {
   await Hive.initFlutter(); // Initialize Hive for Flutter
-  Hive.openBox("mindwaves"); // Open the Hive box that represents the app data
-  Hive.openBox(
-      "mindwaves_options"); // Open the Hive box that represents the app settings
 
-  NotificationService()
-      .requestPermission(); // Request permission to send notifications
-  NotificationService().initNotifications(); // Initialize the notifications
+  // Open the Hive box that represents the app data
+  Hive.openBox("mindwaves");
+  // Open the Hive box that stores the app settings
+  Hive.openBox("mindwaves_options");
+
+  // Request permission to send notifications as soon as the app starts
+  NotificationService().requestPermission();
+  // Initialize the notifications service in order to send notifications
+  NotificationService().initNotifications();
 
   runApp(const Mindwaves());
 }
