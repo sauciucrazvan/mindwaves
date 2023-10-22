@@ -34,6 +34,8 @@ class _SettingsPanelState extends State<SettingsPanel> {
     aiImprovements = _settingsService.getSettingValue('ai-improvements');
     graphVisibility = _settingsService.getSettingValue('hide-graph-visibility');
     removeOldData = _settingsService.getSettingValue('remove-old-data');
+    disableNotifications =
+        _settingsService.getSettingValue('disable-notifications');
     super.initState();
   }
 
