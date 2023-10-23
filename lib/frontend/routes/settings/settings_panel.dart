@@ -176,9 +176,19 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: Text(
-                        "Disable reminders",
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Disable reminders",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          Text(
+                            "Reminders only work if you\nrun your app in the background.",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
                       ),
                     ),
                     Switch(

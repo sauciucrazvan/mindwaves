@@ -39,22 +39,25 @@ class WeeklyReport extends StatelessWidget {
     Map<dynamic, dynamic> dataMap = trackerService.getData();
     List<Map<String, dynamic>> chartData = [];
 
-    dataMap.forEach((date, details) {
-      DateTime reportDate = DateTime.parse(date);
-      if (reportDate
-          .isBefore(DateTime.now().subtract(const Duration(days: 7)))) {
-        if (!removeOldData) return;
-        trackerService
-            .getDataMap()
-            .delete(date); // Remove data if the user requests it
-        return; // Keep a maximum of 7 days in the report
-      }
+    if (dataMap.isNotEmpty) {
+      dataMap.forEach((date, details) {
+        DateTime reportDate = DateTime.parse(date);
+        if (reportDate
+            .isBefore(DateTime.now().subtract(const Duration(days: 7)))) {
+          if (!removeOldData) return;
+          trackerService
+              .getDataMap()
+              .delete(date); // Remove data if the user requests it
+          return; // Keep a maximum of 7 days in the report
+        }
 
-      chartData.add({
-        'day': "${DateFormat('E').format(reportDate)} ${details["feeling"]}",
-        'score': details['score']
+        chartData.add({
+          'day': "${DateFormat('E').format(reportDate)} ${details["feeling"]}",
+          'score': details['score']
+        });
       });
-    });
+    }
+
     num totalScore =
         chartData.fold(0, (num previousValue, Map<String, dynamic> element) {
       return previousValue + element['score'];
@@ -92,7 +95,7 @@ class WeeklyReport extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                if (!hideGraph) ...[
+                if (!hideGraph && chartData.isNotEmpty) ...[
                   // Weekly report graph
                   SizedBox(
                     height: 150,
@@ -128,21 +131,21 @@ class WeeklyReport extends StatelessWidget {
                 ],
 
                 // Score report
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Your weekly happiness score is ${((totalScore / maxScore) * 100).round()}%.",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      "Report generated on ${DateFormat('MMM dd, yyyy').format(DateTime.now())}.",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
+                Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Your weekly happiness score is ${((totalScore / maxScore) * 100).round()}%.",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "Report generated on ${DateFormat('MMM dd, yyyy').format(DateTime.now())}.",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
                 ),
 
                 const SizedBox(height: 16),
