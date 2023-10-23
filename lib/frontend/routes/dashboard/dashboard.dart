@@ -88,7 +88,7 @@ class _DashboardState extends State<Dashboard> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
-                    "How was your day?",
+                    "How did you feel today?",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
@@ -136,11 +136,14 @@ class _DashboardState extends State<Dashboard> {
                           width: 32, height: 32),
                       color: Theme.of(context).colorScheme.secondary,
                       onTap: () {
+                        int index = _pageController.page?.round() ??
+                            _pageController.initialPage;
+
                         bool succedeed = TrackerService().trackDay(
-                            moods.values.elementAt(
-                                _pageController.page?.round() ??
-                                    _pageController.initialPage)['score'],
-                            _detailsController.text);
+                          moods.values.elementAt(index)['score'],
+                          moods.values.elementAt(index)['icon'],
+                          _detailsController.text,
+                        );
 
                         if (!succedeed) {
                           showElevatedNotification(context,

@@ -11,7 +11,7 @@ import 'package:mindwaves/backend/services/settings_service.dart';
 class TrackerService {
   final _masterBox = Hive.box('mindwaves');
 
-  bool trackDay(int score, String? details) {
+  bool trackDay(int score, String? feeling, String? details) {
     //get an unique daily ID
     String id = DateFormat("yyyy-MM-dd").format(DateTime.now());
 
@@ -25,7 +25,8 @@ class TrackerService {
       iv = disposableMap.values.first;
     }
 
-    _masterBox.put(id, {'score': score, 'details': details, 'iv': iv});
+    _masterBox.put(
+        id, {'score': score, 'feeling': feeling, 'details': details, 'iv': iv});
 
     SettingsService settingsService = SettingsService();
     if (settingsService.getSettingValue('disable-notifications') == false &&
@@ -75,13 +76,15 @@ class TrackerService {
               EncryptionService().decryptText(value['details'], value['iv']);
           factoryMap[key] = {
             'score': value['score'],
+            'feeling': value['feeling'],
             'details': decryptedText,
           };
         } else {
           // no text, return just the score and plan details
           factoryMap[key] = {
             'score': value['score'],
-            'details': value['details']
+            'feeling': value['feeling'],
+            'details': value['details'],
           };
         }
       }
