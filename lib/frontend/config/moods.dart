@@ -1,39 +1,79 @@
 import 'package:flutter/material.dart';
 
 final Map<String, Map<String, dynamic>> moods = {
-  "Disastrous": {
-    "icon": 'assets/animations/disastrous.json',
+  "Sadness": {
+    "icon": "😔",
     "color": const Color(0xFF710627),
-    "score": 0,
-  },
-  "Very Sad": {
-    "icon": Icons.sentiment_very_dissatisfied,
-    "color": const Color(0xFF81171B),
     "score": 1,
   },
-  "Sad :(": {
-    "icon": Icons.sentiment_dissatisfied,
+  "Sick": {
+    "icon": "🤒",
+    "color": const Color(0xFF710627),
+    "score": 1,
+  },
+  "Disgusted": {
+    "icon": "🤮",
+    "color": const Color(0xFF710627),
+    "score": 1,
+  },
+  "Fear": {
+    "icon": "😱",
     "color": const Color(0xFFAD2E24),
     "score": 2,
   },
-  "Meh..": {
-    "icon": Icons.sentiment_neutral,
+  "Angry": {
+    "icon": "😡",
+    "color": const Color(0xFFAD2E24),
+    "score": 2,
+  },
+  "Surprised": {
+    "icon": "😮",
+    "color": const Color(0xFFAD2E24),
+    "score": 2,
+  },
+  "Quirky": {
+    "icon": "😶",
     "color": const Color(0xFFCA5310),
     "score": 3,
   },
-  "Okay": {
-    "icon": Icons.sentiment_satisfied,
+  "Neutral": {
+    "icon": "😐",
+    "color": const Color(0xFFCA5310),
+    "score": 3,
+  },
+  "Sleepy": {
+    "icon": "🥱",
+    "color": const Color(0xFFCA5310),
+    "score": 3,
+  },
+  "Happiness": {
+    "icon": "😁",
     "color": const Color(0xFF329F5B),
     "score": 4,
   },
-  "Good!": {
-    "icon": Icons.sentiment_very_satisfied,
-    "color": const Color(0xFF0C8346),
+  "Relaxed": {
+    "icon": "😌",
+    "color": const Color(0xFF329F5B),
+    "score": 4,
+  },
+  "Powerful": {
+    "icon": "💪",
+    "color": const Color(0xFF329F5B),
+    "score": 4,
+  },
+  "Romantic": {
+    "icon": "🥰",
+    "color": const Color(0xFF03A316),
     "score": 5,
   },
-  "Excellent :D": {
-    "icon": 'assets/animations/happy.json',
+  "Energetic": {
+    "icon": "😁",
     "color": const Color(0xFF03A316),
-    "score": 6,
+    "score": 5,
+  },
+  "Cool": {
+    "icon": "😎",
+    "color": const Color(0xFF03A316),
+    "score": 5,
   },
 };

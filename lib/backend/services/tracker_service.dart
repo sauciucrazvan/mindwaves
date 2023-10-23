@@ -1,4 +1,5 @@
 // Generic imports
+import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 
@@ -27,7 +28,8 @@ class TrackerService {
     _masterBox.put(id, {'score': score, 'details': details, 'iv': iv});
 
     SettingsService settingsService = SettingsService();
-    if (settingsService.getSettingValue('disable-notifications') == false) {
+    if (settingsService.getSettingValue('disable-notifications') == false &&
+        Platform.isAndroid) {
       int hour = settingsService.getSettingValue("notification-time")['hour'] ??
               21,
           minute =
@@ -45,6 +47,7 @@ class TrackerService {
         scheduledNotificationDateTime: notificationTime,
       );
     }
+
     return true;
   }
 
