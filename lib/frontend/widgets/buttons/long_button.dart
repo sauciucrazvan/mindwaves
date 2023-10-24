@@ -19,10 +19,7 @@ class LongButton extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       trailing: trailing,
       onTap: () => onTap!(),
