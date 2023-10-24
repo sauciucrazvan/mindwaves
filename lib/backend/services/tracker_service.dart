@@ -31,11 +31,12 @@ class TrackerService {
     SettingsService settingsService = SettingsService();
     if (settingsService.getSettingValue('disable-notifications') == false &&
         Platform.isAndroid) {
-      int hour = settingsService.getSettingValue("notification-time")['hour'] ??
-              21,
-          minute =
-              settingsService.getSettingValue("notification-time")['minute'] ??
-                  00;
+      int hour = 21, minute = 00;
+
+      if (settingsService.getSettingValue("notification-time") is Map) {
+        hour = settingsService.getSettingValue("notification-time")['hour'];
+        minute = settingsService.getSettingValue("notification-time")['minute'];
+      }
 
       DateTime today = DateTime.now(),
           notificationTime =
