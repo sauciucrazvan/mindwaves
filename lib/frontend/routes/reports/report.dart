@@ -9,6 +9,8 @@ import 'package:mindwaves/backend/services/settings_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/config/moods.dart';
+import 'package:mindwaves/frontend/routes/reports/components/improvements_box.dart';
+import 'package:mindwaves/frontend/routes/reports/components/improvements_disabled.dart';
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 
 class WeeklyReport extends StatelessWidget {
@@ -152,27 +154,9 @@ class WeeklyReport extends StatelessWidget {
                 const Divider(),
                 const SizedBox(height: 16),
 
-                if (!aiImprovements) ...[
-                  // Improvements category ~ should be refactored in the future
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Text(
-                      "How can you improve your mood level?",
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  Text(
-                    "AI Improvements is turned off in the settings. Turn it on to receieve recommendations!",
-                    style: TextStyle(
-                      color: Colors.red[400],
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+                (!aiImprovements
+                    ? const DisabledImprovementsError()
+                    : const ImprovementsBox()),
               ],
             ),
           ),
