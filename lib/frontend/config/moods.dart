@@ -49,6 +49,11 @@ final Map<String, Map<String, dynamic>> moods = {
     "color": const Color(0xFFCA5310),
     "score": 3,
   },
+  "Indifferent": {
+    "icon": "😶",
+    "color": const Color(0xFFCA5310),
+    "score": 3,
+  },
   "Neutral": {
     "icon": "😐",
     "color": const Color(0xFFCA5310),
@@ -61,11 +66,6 @@ final Map<String, Map<String, dynamic>> moods = {
   },
   "Confused": {
     "icon": "😕",
-    "color": const Color(0xFFCA5310),
-    "score": 3,
-  },
-  "Indifferent": {
-    "icon": "😶",
     "color": const Color(0xFFCA5310),
     "score": 3,
   },
