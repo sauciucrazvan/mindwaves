@@ -1,10 +1,11 @@
 // Generic imports
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter/material.dart';
 
 // Backend imports
 import 'package:mindwaves/backend/services/tracker_service.dart';
+import 'package:mindwaves/backend/services/notification_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/config/moods.dart';
@@ -155,6 +156,11 @@ class _DashboardState extends State<Dashboard> {
                             "Successfully tracked the day.",
                             Colors.lightGreen.shade700,
                           );
+
+                          // Checks if the user has reminders on and sends
+                          // a scheduled notification to remind him about the
+                          // tracking.
+                          NotificationService().sendReminder();
                         }
                       },
                     ),

@@ -1,12 +1,9 @@
 // Generic imports
-import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 
 // Backend imports
 import 'package:mindwaves/backend/services/encryption_service.dart';
-import 'package:mindwaves/backend/services/notification_service.dart';
-import 'package:mindwaves/backend/services/settings_service.dart';
 
 class TrackerService {
   final _masterBox = Hive.box('mindwaves');
@@ -27,28 +24,6 @@ class TrackerService {
 
     _masterBox.put(
         id, {'score': score, 'feeling': feeling, 'details': details, 'iv': iv});
-
-    SettingsService settingsService = SettingsService();
-    if (settingsService.getSettingValue('disable-notifications') == false &&
-        Platform.isAndroid) {
-      int hour = 21, minute = 00;
-
-      if (settingsService.getSettingValue("notification-time") is Map) {
-        hour = settingsService.getSettingValue("notification-time")['hour'];
-        minute = settingsService.getSettingValue("notification-time")['minute'];
-      }
-
-      DateTime today = DateTime.now(),
-          notificationTime =
-              DateTime(today.year, today.month, today.day, hour, minute)
-                  .add(const Duration(days: 1));
-      NotificationService().scheduleNotification(
-        id: 0,
-        title: "Hey!",
-        body: "Don't forget about tracking your day!",
-        scheduledNotificationDateTime: notificationTime,
-      );
-    }
 
     return true;
   }

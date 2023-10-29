@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mindwaves/backend/services/settings_service.dart';
 import 'package:timezone/data/latest.dart' as timezones;
@@ -85,5 +87,31 @@ class NotificationService {
     final String minuteString = minute.padLeft(2, '0');
 
     return '$hourString:$minuteString';
+  }
+
+  void sendReminder() {
+    SettingsService settingsService = SettingsService();
+    if (settingsService.getSettingValue('disable-notifications') == false &&
+        Platform.isAndroid) {
+      int hour = 21, minute = 00;
+
+      if (settingsService.getSettingValue("notification-time") is Map) {
+        hour = settingsService.getSettingValue("notification-time")['hour'];
+        minute = settingsService.getSettingValue("notification-time")['minute'];
+      }
+
+      DateTime today = DateTime.now(),
+          notificationTime =
+              DateTime(today.year, today.month, today.day, hour, minute)
+                  .add(const Duration(days: 1));
+      NotificationService()
+          .scheduleNotification(
+            id: 0,
+            title: "Hey!",
+            body: "Don't forget about tracking your day!",
+            scheduledNotificationDateTime: notificationTime,
+          )
+          .catchError((error) => throw Exception(error));
+    }
   }
 }
