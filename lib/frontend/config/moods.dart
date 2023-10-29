@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final Map<String, Map<String, dynamic>> moods = {
   // Tier 1
-  "Sadness": {
+  "Sad": {
     "icon": "😔",
     "color": const Color(0xFF710627),
     "score": 1,
@@ -50,7 +50,7 @@ final Map<String, Map<String, dynamic>> moods = {
     "score": 3,
   },
   "Indifferent": {
-    "icon": "😶",
+    "icon": "😑",
     "color": const Color(0xFFCA5310),
     "score": 3,
   },
@@ -70,7 +70,7 @@ final Map<String, Map<String, dynamic>> moods = {
     "score": 3,
   },
   // Tier 4
-  "Happiness": {
+  "Happy": {
     "icon": "😀",
     "color": const Color(0xFF329F5B),
     "score": 4,
