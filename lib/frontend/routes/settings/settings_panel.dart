@@ -27,13 +27,16 @@ class _SettingsPanelState extends State<SettingsPanel> {
   bool graphVisibility = false,
       removeOldData = false,
       aiImprovements = false,
-      disableNotifications = false;
+      disableNotifications = false,
+      informativeMessages = false;
 
   @override
   void initState() {
     aiImprovements = _settingsService.getSettingValue('ai-improvements');
     graphVisibility = _settingsService.getSettingValue('hide-graph-visibility');
     removeOldData = _settingsService.getSettingValue('remove-old-data');
+    informativeMessages =
+        _settingsService.getSettingValue('disable-informative-messages');
     disableNotifications =
         _settingsService.getSettingValue('disable-notifications');
     super.initState();
@@ -138,6 +141,32 @@ class _SettingsPanelState extends State<SettingsPanel> {
                               'hide-graph-visibility', value);
 
                           graphVisibility = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+
+                // Disable informative messages
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Text(
+                        "Disable informative messages",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    Switch(
+                      activeColor: primaryColor,
+                      value: informativeMessages,
+                      onChanged: (value) {
+                        setState(() {
+                          _settingsService.setSettingValue(
+                              'disable-informative-messages', value);
+
+                          informativeMessages = value;
                         });
                       },
                     ),
