@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Backend imports
 import 'package:mindwaves/backend/services/settings_service.dart';
+import 'package:mindwaves/backend/services/improvements_service.dart';
 
 class ImprovementsBox extends StatelessWidget {
   const ImprovementsBox({super.key});
@@ -30,7 +31,7 @@ class ImprovementsBox extends StatelessWidget {
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             child: Text(
-              "Hey, this is what you can do to improve your life:\n\n\n\n",
+              "Hey, this is what you can do to improve your life:\n${ImprovementsService().getImprovements()}",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
@@ -42,7 +43,7 @@ class ImprovementsBox extends StatelessWidget {
               Icon(Icons.info, color: Colors.red[400]),
               const SizedBox(width: 4),
               SizedBox(
-                width: MediaQuery.of(context).size.width - 50,
+                width: MediaQuery.of(context).size.width - 60,
                 child: Text(
                   "This is just a prototype. Informations might not be accurate, if you have mental problems please talk with a specialist.",
                   style: Theme.of(context).textTheme.bodyMedium,
