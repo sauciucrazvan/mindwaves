@@ -2,8 +2,8 @@
 import 'package:mindwaves/backend/services/tracker_service.dart';
 
 class ImprovementsService {
-  // Converting a Hive box to a regular Map
-  Map dataMap = TrackerService().getDataMap().toMap();
+  // Getting the data from the Tracker Service
+  Map dataMap = TrackerService().getData();
 
   Map getWeeklyData() {
     Map factoryMap = {};
@@ -25,9 +25,8 @@ class ImprovementsService {
     Map weeklyData = getWeeklyData(); // Getting the data
     String improvements = ""; // Creating a string that stores improvements
 
-    // TODO: Replace key with real improvement when you implement dialogflow
     weeklyData.forEach((key, value) {
-      improvements += "• $key\n";
+      improvements += "\n• $key";
     });
 
     return improvements;
