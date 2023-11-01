@@ -17,9 +17,27 @@ class ImprovementsBox extends StatelessWidget {
 
     return Column(
       children: [
-        Text(
-          "Improvements",
-          style: Theme.of(context).textTheme.bodyLarge,
+        Row(
+          children: [
+            Text(
+              "Improvements",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(width: 8),
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text(
+                  "EXPERIMENTAL",
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 4),
         Container(
