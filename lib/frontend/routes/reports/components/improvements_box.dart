@@ -30,9 +30,12 @@ class ImprovementsBox extends StatelessWidget {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-            child: Text(
-              "Hey, this is what you can do to improve your life:\n${ImprovementsService().getImprovements()}",
-              style: Theme.of(context).textTheme.bodyMedium,
+            child: FutureBuilder(
+              future: ImprovementsService().getImprovements(),
+              builder: (context, snapshot) => Text(
+                "Hey, this is what you can do to improve your life:\n${snapshot.data}",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ),
           ),
         ),
