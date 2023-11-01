@@ -24,7 +24,7 @@ Fully open-source mood tracker with AI integration and real-time notifications t
 
 Mindwaves offers a range of powerful features to help you track your mood and enhance your well-being:
 
-- **AI Recommendations**: Mindwaves leverages Dialogflow's AI capabilities to provide personalized mood improvement recommendations, helping you achieve a positive state of mind. 🤖📊
+- **AI Recommendations**: Mindwaves leverages ChatGPT's AI capabilities to provide personalized mood improvement recommendations, helping you achieve a positive state of mind. 🤖📊
 - **Real-time Notifications**: Stay informed and engaged with real-time notifications that keep you updated on your mood tracking progress. 📱🔔
 - **Diverse Mood Selection**: Choose from a wide variety of moods to accurately reflect your emotional state at any moment, allowing for precise mood tracking and analysis. 😃😢
 
