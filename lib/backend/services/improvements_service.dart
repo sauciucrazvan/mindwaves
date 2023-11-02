@@ -59,13 +59,15 @@ class ImprovementsService {
     await Future.forEach(weeklyData.keys, (key) async {
       Map innerMap = weeklyData[key];
 
-      if ((innerMap['details'] as String).isNotEmpty) {
-        // Asking the AI how to improve the day (janky way of implementing it, i know)
-        String response = await generateText(
-            "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters and just one suggestion)");
+      if (innerMap['score'] < 5) {
+        if ((innerMap['details'] as String).isNotEmpty) {
+          // Asking the AI how to improve the day (janky way of implementing it, i know)
+          String response = await generateText(
+              "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters and just one suggestion)");
 
-        improvements +=
-            "\n• ${DateFormat('EEEE').format(DateTime.parse(key))}\nDetails provided » ${innerMap['details']}\nRecommendations » $response\n";
+          improvements +=
+              "\n• ${DateFormat('EEEE').format(DateTime.parse(key))}\nDetails provided » ${innerMap['details']}\nRecommendations » $response\n";
+        }
       }
     });
 

@@ -66,7 +66,7 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                   _improvementsText = snapshot.data!;
                 } else {
                   _improvementsText =
-                      "\nLoading... Make sure you have enough credit in your OpenAI wallet.";
+                      "\nLoading...\n\nMake sure you have enough credit in your OpenAI wallet.\nAlso, make sure you've provided enough details.\nAnd don't forget that only days with a lower score are taken into account!";
                 }
 
                 return Text(
