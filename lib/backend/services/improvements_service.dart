@@ -1,5 +1,6 @@
 // Generic imports
 import 'dart:convert';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,6 +9,9 @@ import 'package:mindwaves/backend/privates/chatgpt_key.dart';
 import 'package:mindwaves/backend/services/tracker_service.dart';
 
 class ImprovementsService {
+  // Get the AI Improvements Caching Box
+  Box improvementsBox = Hive.box("mindwaves_improvements");
+
   // Getting the data from the Tracker Service
   Map dataMap = TrackerService().getData();
 
@@ -47,7 +51,9 @@ class ImprovementsService {
     return jsonDecode(response.body)['choices'][0]['message']['content'];
   }
 
-  Future<String> getImprovements() async {
+  Future<String> generateImprovements() async {
+    print("sent a request to the API");
+
     Map weeklyData = getWeeklyData(); // Getting the data
     String improvements = ""; // Creating a string that stores improvements
 
@@ -55,13 +61,30 @@ class ImprovementsService {
     await Future.forEach(weeklyData.keys, (key) async {
       Map innerMap = weeklyData[key];
 
-      String response = await generateText(
-          "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters)");
+      if ((innerMap['details'] as String).isNotEmpty) {
+        String response = await generateText(
+            "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters)");
 
-      improvements +=
-          "\n• ${DateFormat('EEE').format(DateTime.parse(key))} » $response";
+        improvements +=
+            "\n• ${DateFormat('EEE').format(DateTime.parse(key))} » $response";
+      }
     });
 
     return improvements;
+  }
+
+  Future<String> getImprovements(bool shouldRegenerate) async {
+    if (shouldRegenerate) {
+      String improvements = await generateImprovements();
+      improvementsBox.put("improvements", improvements);
+      return improvements;
+    }
+
+    String? improvements = improvementsBox.get("improvements");
+    if (improvements == null || improvements.isEmpty) {
+      return getImprovements(true);
+    } else {
+      return improvements;
+    }
   }
 }

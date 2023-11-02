@@ -25,6 +25,8 @@ void main() async {
   Hive.openBox("mindwaves");
   // Open the Hive box that stores the app settings
   Hive.openBox("mindwaves_options");
+  // Open the Hive box that caches the AI Improvements
+  Hive.openBox("mindwaves_improvements");
 
   // Request permission to send notifications as soon as the app starts
   NotificationService().requestPermission();
