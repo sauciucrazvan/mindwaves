@@ -81,9 +81,8 @@ class ImprovementsService {
     String? improvements = improvementsBox.get("improvements");
     if (improvements == null || improvements.isEmpty) {
       return getImprovements(true);
-    } else {
-      return improvements;
     }
+    return improvements;
   }
 
   void clearCache() => improvementsBox.clear();
