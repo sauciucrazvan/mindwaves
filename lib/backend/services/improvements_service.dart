@@ -37,7 +37,9 @@ class ImprovementsService {
         'Authorization': 'Bearer ${getChatGPTKey()}'
       },
       body: jsonEncode({
-        'prompt': prompt,
+        'messages': [
+          {"role": "user", "content": prompt}
+        ],
         'model': 'gpt-3.5-turbo',
       }),
     );
@@ -50,14 +52,14 @@ class ImprovementsService {
     String improvements = ""; // Creating a string that stores improvements
 
     // Looping through every tracked day of the week
-    Future.forEach(weeklyData.keys, (key) async {
+    await Future.forEach(weeklyData.keys, (key) async {
       Map innerMap = weeklyData[key];
 
       String response = await generateText(
           "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters)");
 
       improvements +=
-          "\n• ${DateFormat('MMM').format(DateTime.parse(key))} » $response";
+          "\n• ${DateFormat('EEE').format(DateTime.parse(key))} » $response";
     });
 
     return improvements;
