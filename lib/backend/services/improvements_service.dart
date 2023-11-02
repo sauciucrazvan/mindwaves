@@ -60,11 +60,12 @@ class ImprovementsService {
       Map innerMap = weeklyData[key];
 
       if ((innerMap['details'] as String).isNotEmpty) {
+        // Asking the AI how to improve the day
         String response = await generateText(
             "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters)");
 
         improvements +=
-            "\n• ${DateFormat('EEE').format(DateTime.parse(key))} » $response";
+            "\n• ${DateFormat('EEE').format(DateTime.parse(key))}\nDetails provided » ${innerMap['details']}\nRecommendations » $response\n";
       }
     });
 
