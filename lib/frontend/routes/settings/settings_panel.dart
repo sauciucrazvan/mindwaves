@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:mindwaves/backend/services/tracker_service.dart';
 import 'package:mindwaves/backend/services/settings_service.dart';
 import 'package:mindwaves/backend/services/notification_service.dart';
+import 'package:mindwaves/backend/services/improvements_service.dart';
 
 // Frontend imports
 import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
@@ -370,6 +371,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
                           "Are you sure you want to clear your entire history?\nThis action cannot be undone!",
                       confirm: () {
                         TrackerService().clearData();
+                        ImprovementsService().clearCache();
                         Navigator.pop(context); // close the dialog
                       },
                     ),

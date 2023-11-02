@@ -52,8 +52,6 @@ class ImprovementsService {
   }
 
   Future<String> generateImprovements() async {
-    print("sent a request to the API");
-
     Map weeklyData = getWeeklyData(); // Getting the data
     String improvements = ""; // Creating a string that stores improvements
 
@@ -87,4 +85,6 @@ class ImprovementsService {
       return improvements;
     }
   }
+
+  void clearCache() => improvementsBox.clear();
 }
