@@ -42,7 +42,7 @@ class ImprovementsService {
       }),
     );
 
-    return response.body;
+    return jsonDecode(response.body)['choices'][0]['message']['content'];
   }
 
   Future<String> getImprovements() async {
