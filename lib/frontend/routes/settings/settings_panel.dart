@@ -358,10 +358,10 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 // Clear entire history
                 LongButton(
                   title: "Clear entire history",
-                  trailing: const Icon(
+                  trailing: Icon(
                     Icons.manage_history,
                     size: 24,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   color: Theme.of(context).colorScheme.secondary,
                   onTap: () => showDialog(
