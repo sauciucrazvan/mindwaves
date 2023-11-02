@@ -66,7 +66,7 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                   _improvementsText = snapshot.data!;
                 } else {
                   _improvementsText =
-                      "No data receieved. Check your OpenAI credit!";
+                      "Loading... Make sure you have enough credit in your OpenAI wallet.";
                 }
 
                 return Text(
@@ -86,18 +86,18 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                 title:
                     "Are you sure you want to regenerate the AI Improvements?",
                 confirm: () async {
+                  showElevatedNotification(
+                    context,
+                    "Regenerating... Please be patient, it might take a while!",
+                    Colors.lightGreen.shade700,
+                  );
+                  Navigator.pop(context);
+
                   String newImprovementsText =
                       await ImprovementsService().getImprovements(true);
                   setState(() {
                     _improvementsText = newImprovementsText;
                   });
-
-                  showElevatedNotification(
-                    context,
-                    "Action completed succesfully.",
-                    Colors.lightGreen.shade700,
-                  );
-                  Navigator.pop(context);
                 },
               ),
             ),
