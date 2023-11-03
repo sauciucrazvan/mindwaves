@@ -70,22 +70,24 @@ class ImprovementsService {
     String improvements = ""; // Creating a string that stores improvements
 
     // Looping through every tracked day of the week
-    await Future.forEach(weeklyData.keys, (key) async {
+    await Future.forEach(weeklyData.keys, (key) {
       Map innerMap = weeklyData[key];
 
       if (innerMap['score'] < 5) {
         if ((innerMap['details'] as String).isNotEmpty) {
-          // Asking the AI how to improve the day (janky way of implementing it, i know)
-          String response = await generateText(
-              "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters and just one suggestion)");
-
           improvements +=
-              "\n• ${DateFormat('EEEE').format(DateTime.parse(key))}\nYour input » ${innerMap['details']}\nAI output » $response\n";
+              "${DateFormat('EEEE').format(DateTime.parse(key))} ${innerMap['details']}";
         }
       }
     });
 
-    return improvements;
+    if (improvements.isEmpty) return "No details provided in any tracked day!";
+
+    // Asking the AI how to improve the day (janky way of implementing it, i know)
+    String response = await generateText(
+        "Hey, what can I do to improve my life? This is what I did this week: $improvements (please limit yourself to 128 characters)");
+
+    return "Hey, this is what you can do to improve your life:\n\n$response";
   }
 
   Future<String> getImprovements(bool shouldRegenerate) async {

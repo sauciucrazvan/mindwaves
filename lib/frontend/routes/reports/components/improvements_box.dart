@@ -73,7 +73,7 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                 }
 
                 return Text(
-                  "Hey, this is what you can do to improve your life:\n$_improvementsText",
+                  _improvementsText,
                   style: Theme.of(context).textTheme.bodyMedium,
                 );
               },
