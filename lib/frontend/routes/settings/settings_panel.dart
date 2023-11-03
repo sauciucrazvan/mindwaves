@@ -369,10 +369,10 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 // Clear entire history
                 LongButton(
                   title: "Clear entire history",
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.manage_history,
                     size: 24,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Colors.red,
                   ),
                   color: Theme.of(context).colorScheme.secondary,
                   onTap: () => showDialog(
@@ -395,10 +395,10 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   // Clear improvements cache
                   LongButton(
                     title: "Clear improvements cache",
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.cached,
                       size: 24,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Colors.red,
                     ),
                     color: Theme.of(context).colorScheme.secondary,
                     onTap: () => showDialog(
