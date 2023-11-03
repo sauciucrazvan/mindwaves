@@ -116,11 +116,14 @@ class _SettingsPanelState extends State<SettingsPanel> {
                               color: Theme.of(context).colorScheme.primary,
                               borderRadius: BorderRadius.circular(4.0),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(4.0),
                               child: Text(
                                 "EXPERIMENTAL",
-                                style: Theme.of(context).textTheme.bodySmall,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

@@ -1,6 +1,6 @@
-// Generic imports
 // ignore_for_file: use_build_context_synchronously
 
+// Generic imports
 import 'package:flutter/material.dart';
 
 // Backend imports
@@ -40,11 +40,14 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(4.0),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
+              child: const Padding(
+                padding: EdgeInsets.all(4.0),
                 child: Text(
                   "EXPERIMENTAL",
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

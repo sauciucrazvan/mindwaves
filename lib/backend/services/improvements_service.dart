@@ -66,7 +66,7 @@ class ImprovementsService {
               "Hey, what can I do to improve my day? This is what I did today: ${innerMap['details']} (please limit yourself to 50 characters and just one suggestion)");
 
           improvements +=
-              "\n• ${DateFormat('EEEE').format(DateTime.parse(key))}\nDetails provided » ${innerMap['details']}\nRecommendations » $response\n";
+              "\n• ${DateFormat('EEEE').format(DateTime.parse(key))}\nYour input » ${innerMap['details']}\nAI output » $response\n";
         }
       }
     });

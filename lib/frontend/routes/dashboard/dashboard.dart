@@ -185,10 +185,10 @@ class _DashboardState extends State<Dashboard> {
                     children: [
                       LongButton(
                         title: "Weekly report",
-                        trailing: const Icon(
+                        trailing: Icon(
                           Icons.calendar_month,
                           size: 24,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                         color: Theme.of(context).colorScheme.secondary,
                         onTap: () => Navigator.push(
@@ -201,10 +201,10 @@ class _DashboardState extends State<Dashboard> {
                       const SizedBox(height: 4),
                       LongButton(
                         title: "View history",
-                        trailing: const Icon(
+                        trailing: Icon(
                           Icons.history,
                           size: 24,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                         color: Theme.of(context).colorScheme.secondary,
                         onTap: () => Navigator.push(
@@ -217,10 +217,10 @@ class _DashboardState extends State<Dashboard> {
                       const SizedBox(height: 4),
                       LongButton(
                         title: "Settings",
-                        trailing: const Icon(
+                        trailing: Icon(
                           Icons.settings,
                           size: 24,
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                         color: Theme.of(context).colorScheme.secondary,
                         onTap: () => Navigator.push(
