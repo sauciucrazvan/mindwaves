@@ -413,7 +413,9 @@ class _SettingsPanelState extends State<SettingsPanel> {
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 16),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
