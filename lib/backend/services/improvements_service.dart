@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 // Backend imports
-import 'package:mindwaves/backend/privates/chatgpt_key.dart';
+import 'package:mindwaves/backend/services/settings_service.dart';
 import 'package:mindwaves/backend/services/tracker_service.dart';
 
 class ImprovementsService {
@@ -32,13 +32,19 @@ class ImprovementsService {
   }
 
   Future<String> generateText(String prompt) async {
+    dynamic apiKey = SettingsService().getSettingValue("openai-key");
+
+    if (apiKey is! String || apiKey.isEmpty) {
+      return "An error occured: No API key provided!";
+    }
+
     // Sending a request to the OpenAI API
     String url = 'https://api.openai.com/v1/chat/completions';
     var response = await http.post(
       Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ${getChatGPTKey()}'
+        'Authorization': 'Bearer $apiKey'
       },
       body: jsonEncode({
         'messages': [
@@ -48,7 +54,15 @@ class ImprovementsService {
       }),
     );
 
-    return jsonDecode(response.body)['choices'][0]['message']['content'];
+    var responseBody = jsonDecode(response.body);
+
+    if (response.statusCode == 200 &&
+        responseBody['choices'] != null &&
+        responseBody['choices'].isNotEmpty) {
+      return responseBody['choices'][0]['message']['content'];
+    }
+
+    return "An error occured: please check your API key or your OpenAI wallet.";
   }
 
   Future<String> generateImprovements() async {

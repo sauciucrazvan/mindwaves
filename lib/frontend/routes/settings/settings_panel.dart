@@ -419,6 +419,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   ],
                   Field(
                     textEditingController: apiKeyController,
+                    maxLength: 128,
                     description: "OpenAI API Key",
                     obscureText: true,
                   ),
