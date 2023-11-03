@@ -6,6 +6,7 @@
 
   Credits:
   Răzvan Sauciuc - main developer
+  OpenAI's API - making it possible to generate AI Improvements 
 
 -----
 */

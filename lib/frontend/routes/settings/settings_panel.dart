@@ -390,6 +390,29 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 ),
 
                 if (aiImprovements) ...[
+                  const SizedBox(height: 4),
+
+                  // Clear improvements cache
+                  LongButton(
+                    title: "Clear improvements cache",
+                    trailing: Icon(
+                      Icons.cached,
+                      size: 24,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    color: Theme.of(context).colorScheme.secondary,
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => ConfirmDialog(
+                        title:
+                            "Are you sure you want to clear your improvements cache?\nThis action cannot be undone!",
+                        confirm: () {
+                          ImprovementsService().clearCache();
+                          Navigator.pop(context); // close the dialog
+                        },
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
