@@ -13,6 +13,7 @@ import 'package:mindwaves/frontend/widgets/buttons/leading_button.dart';
 import 'package:mindwaves/frontend/widgets/buttons/long_button.dart';
 import 'package:mindwaves/frontend/widgets/buttons/small_button.dart';
 import 'package:mindwaves/frontend/widgets/dialogs/confirm_dialog.dart';
+import 'package:mindwaves/frontend/widgets/fields/field.dart';
 import 'package:mindwaves/frontend/widgets/notifications/elevated_notification.dart';
 
 class SettingsPanel extends StatefulWidget {
@@ -23,6 +24,7 @@ class SettingsPanel extends StatefulWidget {
 }
 
 class _SettingsPanelState extends State<SettingsPanel> {
+  final TextEditingController apiKeyController = TextEditingController();
   final SettingsService _settingsService = SettingsService();
 
   bool graphVisibility = false,
@@ -30,6 +32,8 @@ class _SettingsPanelState extends State<SettingsPanel> {
       aiImprovements = false,
       disableNotifications = false,
       informativeMessages = false;
+
+  String apiKey = "";
 
   @override
   void initState() {
@@ -40,6 +44,10 @@ class _SettingsPanelState extends State<SettingsPanel> {
         _settingsService.getSettingValue('disable-informative-messages');
     disableNotifications =
         _settingsService.getSettingValue('disable-notifications');
+
+    dynamic openAIKey = _settingsService.getSettingValue('openai-key');
+    apiKey = (openAIKey is String ? openAIKey : "");
+    apiKeyController.text = apiKey;
     super.initState();
   }
 
@@ -380,6 +388,60 @@ class _SettingsPanelState extends State<SettingsPanel> {
                     ),
                   ),
                 ),
+
+                if (aiImprovements) ...[
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Values",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Lottie.asset(
+                        "assets/animations/values.json",
+                        width: 32,
+                        height: 32,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  const Divider(),
+                  if (!informativeMessages) ...[
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        "Please provide your OpenAI API key for the AI Improvements! Make sure you have enough balance in your wallet.",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                  ],
+                  Field(
+                    textEditingController: apiKeyController,
+                    description: "OpenAI API Key",
+                    obscureText: true,
+                  ),
+                  const SizedBox(height: 4),
+                  LongButton(
+                    title: "Update API Key",
+                    trailing: Icon(Icons.key,
+                        color: Theme.of(context).colorScheme.primary),
+                    color: Theme.of(context).colorScheme.secondary,
+                    onTap: () {
+                      setState(() {
+                        apiKey = apiKeyController.text;
+                        _settingsService.setSettingValue("openai-key", apiKey);
+                      });
+
+                      showElevatedNotification(
+                        context,
+                        "Value updated successfully!",
+                        Colors.lightGreen.shade700,
+                      );
+                    },
+                  ),
+                ],
               ],
             ),
           ),
