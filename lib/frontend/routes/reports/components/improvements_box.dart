@@ -18,6 +18,7 @@ class ImprovementsBox extends StatefulWidget {
 
 class _ImprovementsBoxState extends State<ImprovementsBox> {
   String _improvementsText = "";
+  bool isGenerating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,21 +63,35 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-            child: FutureBuilder(
-              future: ImprovementsService().getImprovements(false),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  _improvementsText = snapshot.data!;
-                } else {
-                  _improvementsText =
-                      "Loading...\n\n• Make sure you have enough credit in your OpenAI wallet.\n• Also, make sure you've provided enough details.\n• And don't forget that only days with a lower score are taken into account!";
-                }
+            child: Column(
+              children: [
+                FutureBuilder(
+                  future: ImprovementsService().getImprovements(false),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      _improvementsText = snapshot.data!;
+                    } else {
+                      _improvementsText =
+                          "Loading...\n\n• Make sure you have enough credit in your OpenAI wallet.\n• Also, make sure you've provided enough details.\n• And don't forget that only days with a lower score are taken into account!";
+                    }
 
-                return Text(
-                  _improvementsText,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                );
-              },
+                    return Text(
+                      _improvementsText,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    );
+                  },
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: isGenerating
+                        ? Colors.red
+                        : Theme.of(context).colorScheme.primary,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                )
+              ],
             ),
           ),
         ),
@@ -89,6 +104,7 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                 title:
                     "Are you sure you want to regenerate the AI Improvements?",
                 confirm: () async {
+                  setState(() => isGenerating = true);
                   showElevatedNotification(
                     context,
                     "Regenerating... Please be patient, it might take a while!",
@@ -100,6 +116,7 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                       await ImprovementsService().getImprovements(true);
                   setState(() {
                     _improvementsText = newImprovementsText;
+                    isGenerating = false;
                   });
                 },
               ),
