@@ -7,7 +7,10 @@ void showElevatedNotification(BuildContext context, String message, Color color,
     content: Center(
       child: Text(
         message,
-        style: Theme.of(context).textTheme.bodyMedium,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
         textAlign: TextAlign.center,
       ),
     ),
