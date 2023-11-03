@@ -17,6 +17,7 @@ Fully open-source mood tracker with AI integration and real-time notifications t
 
 ## Table of Contents
 - [Features](#features)
+- [Tutorials](#tutorials)
 - [Technologies Used](#technologies-used)
 - [Dependencies](#dependencies)
 
@@ -29,6 +30,17 @@ Mindwaves offers a range of powerful features to help you track your mood and en
 - **Diverse Mood Selection**: Choose from a wide variety of moods to accurately reflect your emotional state at any moment, allowing for precise mood tracking and analysis. 😃😢
 
 With these features, Mindwaves empowers you to take control of your emotional well-being and lead a happier, healthier life. 🧘‍♂️🌟
+
+## Tutorials
+
+### Where can I get my OpenAI API Key?
+
+- Head over to the [OpenAI view API Keys](https://platform.openai.com/account/api-keys) website.
+- Press 'Create new secret key'
+- Copy the key & paste it into the app
+
+> Make sure you have enough funds in your OpenAI wallet before doing this.
+> Add funds to the [billing website](https://platform.openai.com/account/billing/overview).
 
 ## Technologies Used
 
