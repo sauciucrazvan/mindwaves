@@ -76,7 +76,7 @@ class ImprovementsService {
       if (innerMap['score'] < 5) {
         if ((innerMap['details'] as String).isNotEmpty) {
           details +=
-              "${DateFormat('EEEE').format(DateTime.parse(key))} - ${innerMap['details']}";
+              "${DateFormat('EEEE').format(DateTime.parse(key))} (I was ${innerMap['feeling']}) - ${innerMap['details']}";
         }
       }
     });
