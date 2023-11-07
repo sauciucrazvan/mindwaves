@@ -88,9 +88,12 @@ class DayContainer extends StatelessWidget {
                                 size: 12,
                               ),
                               const SizedBox(width: 2),
-                              Text(
-                                details,
-                                style: Theme.of(context).textTheme.bodySmall,
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width - 75,
+                                child: Text(
+                                  details,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
                               ),
                             ],
                           ),
