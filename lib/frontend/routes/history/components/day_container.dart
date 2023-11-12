@@ -49,8 +49,8 @@ class DayContainer extends StatelessWidget {
                             const SizedBox(width: 4),
                             Text(
                               "+$score",
-                              style: const TextStyle(
-                                color: Colors.amber,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
