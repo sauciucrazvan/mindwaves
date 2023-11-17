@@ -55,6 +55,7 @@ class History extends StatelessWidget {
                       id: mapEntry.key,
                       details: mapEntry.value['details'],
                       score: mapEntry.value['score'],
+                      feeling: mapEntry.value['feeling'],
                     );
                   },
                 ),

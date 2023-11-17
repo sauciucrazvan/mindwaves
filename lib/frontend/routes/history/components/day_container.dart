@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class DayContainer extends StatelessWidget {
   final String id;
   final String details;
+  final String feeling;
   final int score;
 
   const DayContainer({
@@ -12,6 +13,7 @@ class DayContainer extends StatelessWidget {
     required this.id,
     required this.details,
     required this.score,
+    required this.feeling,
   });
 
   @override
@@ -96,7 +98,7 @@ class DayContainer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "+$score",
+                              "$feeling (+$score)",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                                 fontSize: 15,
