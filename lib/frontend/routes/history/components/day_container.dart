@@ -50,16 +50,51 @@ class DayContainer extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Row(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              DateFormat("EEEE").format(DateTime.parse(id)),
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            Row(
+                              children: [
+                                Text(
+                                  DateFormat("EEEE").format(DateTime.parse(id)),
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ],
                             ),
-                            const SizedBox(width: 4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .color,
+                                  size: 12,
+                                ),
+                                const SizedBox(width: 2),
+                                Text(
+                                  DateFormat("MMM dd, yyyy")
+                                      .format(DateTime.parse(id)),
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          width: 2,
+                          height: 45,
+                          color: Colors.grey.shade600,
+                        ),
+                        const SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             Text(
                               "+$score",
                               style: TextStyle(
@@ -68,48 +103,16 @@ class DayContainer extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.calendar_month,
-                              color:
-                                  Theme.of(context).textTheme.bodyMedium!.color,
-                              size: 12,
-                            ),
-                            const SizedBox(width: 2),
-                            Text(
-                              DateFormat("MMM dd, yyyy")
-                                  .format(DateTime.parse(id)),
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                        if (details.isNotEmpty)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.description,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .color,
-                                size: 12,
-                              ),
-                              const SizedBox(width: 2),
+                            if (details.isNotEmpty)
                               SizedBox(
-                                width: MediaQuery.of(context).size.width - 75,
+                                width: MediaQuery.of(context).size.width / 1.75,
                                 child: Text(
                                   details,
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ),
-                            ],
-                          ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
