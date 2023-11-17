@@ -30,10 +30,23 @@ class DayContainer extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 2,
-                    height: 25,
-                    color: Theme.of(context).colorScheme.primary,
+                  Column(
+                    children: [
+                      Container(
+                        width: 2,
+                        height: 17.5,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        radius: 3,
+                      ),
+                      Container(
+                        width: 2,
+                        height: 17.5,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
