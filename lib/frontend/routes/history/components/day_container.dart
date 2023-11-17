@@ -55,37 +55,43 @@ class DayContainer extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  DateFormat("EEEE").format(DateTime.parse(id)),
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.calendar_month,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .color,
-                                  size: 12,
-                                ),
-                                const SizedBox(width: 2),
-                                Text(
-                                  DateFormat("MMM dd, yyyy")
-                                      .format(DateTime.parse(id)),
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                              ],
-                            ),
-                          ],
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 3.25,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    DateFormat("EEEE")
+                                        .format(DateTime.parse(id)),
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.calendar_month,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .color,
+                                    size: 12,
+                                  ),
+                                  const SizedBox(width: 2),
+                                  Text(
+                                    DateFormat("MMM dd, yyyy")
+                                        .format(DateTime.parse(id)),
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(width: 8),
                         Container(
@@ -101,13 +107,12 @@ class DayContainer extends StatelessWidget {
                               "$feeling (+$score)",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
                             ),
                             if (details.isNotEmpty)
                               SizedBox(
-                                width: MediaQuery.of(context).size.width / 1.75,
+                                width: MediaQuery.of(context).size.width / 2.15,
                                 child: Text(
                                   details,
                                   style: Theme.of(context).textTheme.bodySmall,
