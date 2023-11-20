@@ -234,42 +234,6 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   ],
                 ),
 
-                if (aiImprovements)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Complex recommendations",
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            Text(
-                              "This will cost more than\nthe default option.",
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Switch(
-                        activeColor: primaryColor,
-                        value: longerRecommendations,
-                        onChanged: (value) {
-                          setState(() {
-                            _settingsService.setSettingValue(
-                                'longer-recommendations', value);
-
-                            longerRecommendations = value;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-
                 // Send reminders
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -429,7 +393,66 @@ class _SettingsPanelState extends State<SettingsPanel> {
                 ),
 
                 if (aiImprovements) ...[
+                  const SizedBox(height: 16),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "AI Improvements",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Lottie.asset(
+                        "assets/animations/values.json",
+                        width: 32,
+                        height: 32,
+                      ),
+                    ],
+                  ),
+
                   const SizedBox(height: 4),
+                  const Divider(),
+                  const SizedBox(height: 4),
+
+                  // Complex recommendations
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Complex recommendations",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            Text(
+                              "This will cost more than\nthe default option.",
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Switch(
+                        activeColor: primaryColor,
+                        value: longerRecommendations,
+                        onChanged: (value) {
+                          setState(() {
+                            _settingsService.setSettingValue(
+                                'longer-recommendations', value);
+
+                            longerRecommendations = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 8),
+                  const Divider(),
+                  const SizedBox(height: 8),
 
                   // Clear improvements cache
                   LongButton(
@@ -453,24 +476,10 @@ class _SettingsPanelState extends State<SettingsPanel> {
                     ),
                   ),
 
-                  const SizedBox(height: 16),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Values",
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      Lottie.asset(
-                        "assets/animations/values.json",
-                        width: 32,
-                        height: 32,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 8),
                   const Divider(),
+                  const SizedBox(height: 8),
+
                   if (!informativeMessages) ...[
                     Padding(
                       padding: const EdgeInsets.all(4.0),
