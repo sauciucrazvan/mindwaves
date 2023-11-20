@@ -32,7 +32,8 @@ class _SettingsPanelState extends State<SettingsPanel> {
       aiImprovements = false,
       disableNotifications = false,
       informativeMessages = false,
-      longerRecommendations = false;
+      longerRecommendations = false,
+      useGPT4 = false;
 
   String apiKey = "";
 
@@ -47,6 +48,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
         _settingsService.getSettingValue('disable-notifications');
     longerRecommendations =
         _settingsService.getSettingValue('longer-recommendations');
+    useGPT4 = _settingsService.getSettingValue('use-gpt4');
 
     dynamic openAIKey = _settingsService.getSettingValue('openai-key');
     apiKey = (openAIKey is String ? openAIKey : "");
@@ -412,6 +414,43 @@ class _SettingsPanelState extends State<SettingsPanel> {
 
                   const SizedBox(height: 4),
                   const Divider(),
+                  const SizedBox(height: 4),
+
+                  // Use ChatGPT 4.0
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Complex model (GPT-4)",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            Text(
+                              "This will cost more than the\ndefault option. It will provide\nbetter responses.",
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Switch(
+                        activeColor: primaryColor,
+                        value: useGPT4,
+                        onChanged: (value) {
+                          setState(() {
+                            _settingsService.setSettingValue('use-gpt4', value);
+
+                            useGPT4 = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+
                   const SizedBox(height: 4),
 
                   // Complex recommendations

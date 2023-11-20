@@ -32,7 +32,10 @@ class ImprovementsService {
   }
 
   Future<String> generateText(String prompt) async {
-    dynamic apiKey = SettingsService().getSettingValue("openai-key");
+    // Get the settings values
+    SettingsService settingsService = SettingsService();
+    dynamic apiKey = settingsService.getSettingValue("openai-key");
+    bool useGPT4 = settingsService.getSettingValue("use-gpt4");
 
     if (apiKey is! String || apiKey.isEmpty) {
       return "An error occured: No API key provided!";
@@ -50,7 +53,7 @@ class ImprovementsService {
         'messages': [
           {"role": "user", "content": prompt}
         ],
-        'model': 'gpt-3.5-turbo',
+        'model': useGPT4 ? 'gpt-4' : 'gpt-3.5-turbo',
       }),
     );
 
