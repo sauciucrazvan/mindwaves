@@ -143,6 +143,7 @@ class _DashboardState extends State<Dashboard> {
                         bool succedeed = TrackerService().trackDay(
                           moods.values.elementAt(index)['score'],
                           moods.values.elementAt(index)['icon'],
+                          moods.keys.elementAt(index),
                           _detailsController.text,
                         );
 

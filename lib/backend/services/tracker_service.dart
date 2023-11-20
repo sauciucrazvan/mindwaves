@@ -8,7 +8,8 @@ import 'package:mindwaves/backend/services/encryption_service.dart';
 class TrackerService {
   final _masterBox = Hive.box('mindwaves');
 
-  bool trackDay(int score, String? feeling, String? details) {
+  bool trackDay(
+      int score, String? feeling, String? feelingTitle, String? details) {
     //get an unique daily ID
     String id = DateFormat("yyyy-MM-dd").format(DateTime.now());
 
@@ -22,8 +23,13 @@ class TrackerService {
       iv = disposableMap.values.first;
     }
 
-    _masterBox.put(
-        id, {'score': score, 'feeling': feeling, 'details': details, 'iv': iv});
+    _masterBox.put(id, {
+      'score': score,
+      'feeling': feeling,
+      'feeling-title': feelingTitle,
+      'details': details,
+      'iv': iv
+    });
 
     return true;
   }
@@ -53,6 +59,7 @@ class TrackerService {
           factoryMap[key] = {
             'score': value['score'],
             'feeling': value['feeling'],
+            'feeling-title': value['feeling-title'],
             'details': decryptedText,
           };
         } else {
@@ -60,6 +67,7 @@ class TrackerService {
           factoryMap[key] = {
             'score': value['score'],
             'feeling': value['feeling'],
+            'feeling-title': value['feeling-title'],
             'details': value['details'],
           };
         }
