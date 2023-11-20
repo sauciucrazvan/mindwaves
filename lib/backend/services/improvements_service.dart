@@ -83,9 +83,13 @@ class ImprovementsService {
 
     if (details.isEmpty) return "No details provided in any tracked day!";
 
+    // Gets the value of the complex recommendations
+    bool longerRecommendations =
+        SettingsService().getSettingValue('longer-recommendations');
+
     // Asking the AI how to improve the day (janky way of implementing it, i know)
     String prompt =
-            "Hey, what can I do to improve my life? This is what I did this week:\n$details\nPlease limit yourself to 128 characters!",
+            "Hey, what can I do to improve my life? This is what I did this week:\n$details\nPlease limit yourself to ${longerRecommendations ? '256' : '128'} characters!",
         response = await generateText(prompt);
 
     return "Hey, this is what you can do to improve your life:\n\n$response";

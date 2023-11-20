@@ -31,7 +31,8 @@ class _SettingsPanelState extends State<SettingsPanel> {
       removeOldData = false,
       aiImprovements = false,
       disableNotifications = false,
-      informativeMessages = false;
+      informativeMessages = false,
+      longerRecommendations = false;
 
   String apiKey = "";
 
@@ -44,6 +45,8 @@ class _SettingsPanelState extends State<SettingsPanel> {
         _settingsService.getSettingValue('disable-informative-messages');
     disableNotifications =
         _settingsService.getSettingValue('disable-notifications');
+    longerRecommendations =
+        _settingsService.getSettingValue('longer-recommendations');
 
     dynamic openAIKey = _settingsService.getSettingValue('openai-key');
     apiKey = (openAIKey is String ? openAIKey : "");
@@ -230,6 +233,42 @@ class _SettingsPanelState extends State<SettingsPanel> {
                     ),
                   ],
                 ),
+
+                if (aiImprovements)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Complex recommendations",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            Text(
+                              "This will cost more than\nthe default option.",
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Switch(
+                        activeColor: primaryColor,
+                        value: longerRecommendations,
+                        onChanged: (value) {
+                          setState(() {
+                            _settingsService.setSettingValue(
+                                'longer-recommendations', value);
+
+                            longerRecommendations = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
 
                 // Send reminders
                 Row(
