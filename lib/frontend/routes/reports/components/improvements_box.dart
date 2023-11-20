@@ -86,7 +86,7 @@ class _ImprovementsBoxState extends State<ImprovementsBox> {
                   height: 4,
                   decoration: BoxDecoration(
                     color: isGenerating
-                        ? Colors.red
+                        ? Colors.orange
                         : Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(4),
                   ),

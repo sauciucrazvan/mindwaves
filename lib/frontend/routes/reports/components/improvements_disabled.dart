@@ -39,6 +39,14 @@ class DisabledImprovementsError extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                const SizedBox(height: 8),
+                Container(
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                )
               ],
             ),
           ),
