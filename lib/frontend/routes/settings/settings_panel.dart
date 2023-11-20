@@ -468,7 +468,7 @@ class _SettingsPanelState extends State<SettingsPanel> {
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             Text(
-                              "This will cost more than\nthe default option.",
+                              "This will cost more than the\ndefault option. Might take longer.",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],

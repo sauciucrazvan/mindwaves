@@ -1,6 +1,6 @@
 name: mindwaves
 description: Fully open-source mood tracker with AI integration and real-time notifications to keep track of your life.
-version: 1.0.0
+version: 1.1.0
 
 publish_to: 'none'
 
