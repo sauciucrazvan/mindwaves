@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import 'package:mindwaves/backend/services/settings_service.dart';
+
 class DisabledImprovementsError extends StatelessWidget {
   const DisabledImprovementsError({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SettingsService settingsService = SettingsService();
+
+    bool disableInformativeMessages =
+        settingsService.getSettingValue("disable-informative-messages");
+
     return Column(
       children: [
         Padding(
@@ -51,6 +58,21 @@ class DisabledImprovementsError extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 8),
+        if (!disableInformativeMessages)
+          Row(
+            children: [
+              Icon(Icons.info, color: Colors.red[400]),
+              const SizedBox(width: 4),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 60,
+                child: Text(
+                  "Your information will be shared with OpenAI. Keep AI Improvements off if you want privacy.",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }
