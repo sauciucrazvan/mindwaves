@@ -30,10 +30,10 @@ class LongButton extends StatelessWidget {
       tileColor: color,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(isFirst ? 8 : 4),
-        topRight: Radius.circular(isFirst ? 8 : 4),
-        bottomLeft: Radius.circular(isLast ? 8 : 4),
-        bottomRight: Radius.circular(isLast ? 8 : 4),
+        topLeft: Radius.circular(isFirst ? 12 : 4),
+        topRight: Radius.circular(isFirst ? 12 : 4),
+        bottomLeft: Radius.circular(isLast ? 12 : 4),
+        bottomRight: Radius.circular(isLast ? 12 : 4),
       )),
     );
   }

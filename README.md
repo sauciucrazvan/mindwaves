@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/yjA4qfE.png" alt="Mindwave Logo" width="128" height="128">
+<img src="https://i.imgur.com/yjA4qfE.png" alt="Mindwaves Logo" width="128" height="128">
 
 # Mindwaves
 
@@ -14,6 +14,8 @@ Fully open-source mood tracker with AI integration and real-time notifications t
 [![Badge](https://img.shields.io/github/stars/sauciucrazvan/mindwaves?style=for-the-badge)](https://github.com/sauciucrazvan/mindwaves/stargazers)
 [![Badge](https://img.shields.io/github/issues/sauciucrazvan/mindwaves?style=for-the-badge)](https://github.com/sauciucrazvan/mindwaves/issues)
 [![Badge](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+### With the new introduction of custom GPTs, an improved version that should actually help you mentally might happend in the future. Since Mindwaves is just a prototype, a fully expansion of the idea is possible.
 
 ## Table of Contents
 - [Features](#features)
