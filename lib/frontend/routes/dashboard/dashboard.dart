@@ -198,6 +198,7 @@ class _DashboardState extends State<Dashboard> {
                             builder: (context) => const WeeklyReport(),
                           ),
                         ),
+                        isFirst: true,
                       ),
                       const SizedBox(height: 4),
                       LongButton(
@@ -230,6 +231,7 @@ class _DashboardState extends State<Dashboard> {
                             builder: (context) => const SettingsPanel(),
                           ),
                         ),
+                        isLast: true,
                       ),
                     ],
                   ),

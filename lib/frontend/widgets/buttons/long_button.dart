@@ -5,6 +5,8 @@ class LongButton extends StatelessWidget {
   final Widget? trailing;
   final Function? onTap;
   final Color color;
+  final bool isFirst;
+  final bool isLast;
 
   const LongButton({
     super.key,
@@ -12,6 +14,8 @@ class LongButton extends StatelessWidget {
     this.onTap,
     required this.trailing,
     required this.color,
+    this.isFirst = false,
+    this.isLast = false,
   });
 
   @override
@@ -24,7 +28,13 @@ class LongButton extends StatelessWidget {
       trailing: trailing,
       onTap: () => onTap!(),
       tileColor: color,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(isFirst ? 8 : 4),
+        topRight: Radius.circular(isFirst ? 8 : 4),
+        bottomLeft: Radius.circular(isLast ? 8 : 4),
+        bottomRight: Radius.circular(isLast ? 8 : 4),
+      )),
     );
   }
 }
