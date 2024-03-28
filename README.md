@@ -4,8 +4,12 @@
 
 Fully open-source mood tracker with AI integration and real-time notifications to keep track of your life.
 
-> ⚠️ Mindwaves is just a proof-of-concept, a minimum viable product and it's not trained to replace any specialist's work. If you have mental issues, please refer to a specialist trained to help you.
+> ⚠️ Mindwaves is discontinued as of March 28, 2024. It can still be used, even though it is not recommended. The source code will still be accesible, however there will not be any other updates.
+> 
+> It was supposed to be only a proof-of-concept and not a real world application. Everyone is free to make any changes to the source code, use it as they want and improve the idea further. 
+---
 > Checkout the [releases tab](https://github.com/sauciucrazvan/mindwaves/releases) to download the latest version of Mindwaves!
+> 
 > Report any bugs over to the [Issues tab](https://github.com/sauciucrazvan/mindwaves/issues) or open a [Discussions thread](https://github.com/sauciucrazvan/mindwaves/discussions) to suggest your ideas!
 
 # Status
